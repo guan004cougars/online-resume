@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>封装的 Skill | 管开祥</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #0a0d14;
+            --bg-card: rgba(18, 24, 38, 0.92);
+            --bg-card-soft: rgba(23, 31, 49, 0.84);
+            --text: #f8fbff;
+            --muted: #9aa6bf;
+            --soft: #d2def6;
+            --line: rgba(139, 170, 255, 0.16);
+            --line-strong: rgba(139, 170, 255, 0.28);
+            --blue: #78a6ff;
+            --cyan: #57d7d0;
+            --green: #5de6a5;
+            --orange: #ffd08a;
+            --panel: linear-gradient(145deg, rgba(25, 35, 58, 0.98), rgba(14, 19, 31, 0.95));
+            --shadow: 0 24px 48px rgba(0, 0, 0, 0.24);
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Noto Sans", sans-serif;
+            color: var(--text);
+            background:
+                radial-gradient(circle at 12% 10%, rgba(117, 167, 255, 0.18), transparent 28%),
+                radial-gradient(circle at 92% 8%, rgba(83, 215, 208, 0.14), transparent 25%),
+                linear-gradient(180deg, #090c12 0%, #0b1018 100%);
+        }
+
+        .top-tabs-wrap {
+            position: sticky;
+            top: 0;
+            z-index: 20;
+            backdrop-filter: blur(16px);
+            background: rgba(9, 12, 18, 0.78);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .top-tabs {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 14px 24px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            overflow-x: auto;
+        }
+
+        .top-tab {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            white-space: nowrap;
+            padding: 10px 16px;
+            border-radius: 999px;
+            text-decoration: none;
+            color: var(--muted);
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid transparent;
+            transition: 0.2s ease;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .top-tab:hover,
+        .top-tab.active {
+            color: var(--text);
+            border-color: rgba(117, 167, 255, 0.28);
+            background: rgba(117, 167, 255, 0.12);
+        }
+
+        .page-shell {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 34px 24px 64px;
+        }
+
+        .hero {
+            margin-top: 0;
+            padding: 24px 0 10px;
+            background: transparent;
+            border: 0;
+            box-shadow: none;
+        }
+
+        .hero-content {
+            display: block;
+        }
+
+        .hero-main {
+            max-width: 980px;
+        }
+
+        .hero h1 {
+            font-size: clamp(30px, 5vw, 48px);
+            line-height: 1.08;
+            letter-spacing: -0.04em;
+            font-weight: 800;
+            margin-bottom: 14px;
+        }
+
+        .hero-copy {
+            max-width: 920px;
+            color: var(--muted);
+            font-size: 18px;
+            line-height: 1.9;
+        }
+
+        .section-head {
+            display: block;
+            margin: 26px 0 18px;
+            padding-bottom: 14px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 18px;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .section-subtitle {
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .skill-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .skill-card {
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 408px;
+            padding: 28px 30px 26px;
+            border-radius: 28px;
+            background: #1a2130;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 18px 42px rgba(0, 0, 0, 0.22);
+            transition: transform 0.24s ease, border-color 0.24s ease, box-shadow 0.24s ease;
+        }
+
+        .skill-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--accent);
+        }
+
+        .skill-card:hover {
+            transform: translateY(-4px);
+            border-color: color-mix(in srgb, var(--accent) 32%, rgba(255, 255, 255, 0.12));
+            box-shadow: 0 24px 50px rgba(0, 0, 0, 0.28);
+        }
+
+        .skill-card-main {
+            position: relative;
+            z-index: 1;
+            flex: 1;
+        }
+
+        .skill-topline {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 18px;
+            margin-bottom: 20px;
+        }
+
+        .skill-icon {
+            width: auto;
+            height: auto;
+            border-radius: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: color-mix(in srgb, var(--accent) 78%, white);
+        }
+
+        .skill-icon svg {
+            width: 34px;
+            height: 34px;
+        }
+
+        .skill-badge {
+            color: #8f9ab0;
+            background: transparent;
+            border: 0;
+            padding: 0;
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .skill-card h2 {
+            font-size: clamp(28px, 3vw, 40px);
+            line-height: 1.12;
+            letter-spacing: -0.04em;
+            margin-bottom: 12px;
+        }
+
+        .skill-slug {
+            color: var(--accent);
+            font-size: 14px;
+            font-weight: 700;
+            line-height: 1.7;
+            margin-bottom: 18px;
+        }
+
+        .skill-desc {
+            min-height: 112px;
+            color: #b5bfd2;
+            font-size: 15px;
+            line-height: 1.9;
+            margin-bottom: 18px;
+        }
+
+        .meta-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px 14px;
+            margin-bottom: 18px;
+        }
+
+        .meta-item {
+            padding: 0;
+            border-radius: 0;
+            background: transparent;
+            border: 0;
+            position: relative;
+        }
+
+        .meta-item:not(:last-child)::after {
+            content: "·";
+            margin-left: 14px;
+            color: #657189;
+        }
+
+        .meta-label {
+            color: var(--muted);
+            font-size: 13px;
+            margin-bottom: 0;
+            display: inline;
+        }
+
+        .meta-value {
+            color: var(--text);
+            font-size: 13px;
+            font-weight: 650;
+            display: inline;
+        }
+
+        .tag-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            padding-top: 18px;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .tag {
+            padding: 6px 10px;
+            border-radius: 999px;
+            color: #c9d3e8;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            font-size: 12px;
+            font-weight: 650;
+        }
+
+        .card-actions {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            gap: 10px;
+            margin-top: 18px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            min-height: 54px;
+            padding: 12px 20px;
+            border-radius: 999px;
+            border: 1px solid transparent;
+            font-size: 15px;
+            font-weight: 800;
+            text-decoration: none;
+            cursor: pointer;
+            transition: 0.2s ease;
+            flex: 1;
+        }
+
+        .button-primary {
+            color: #eef4ff;
+            background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 18%, rgba(255, 255, 255, 0.04)), rgba(255, 255, 255, 0.04));
+            border-color: color-mix(in srgb, var(--accent) 60%, rgba(255, 255, 255, 0.08));
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+        }
+
+        .button-secondary {
+            color: #d6deef;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .button:hover {
+            transform: translateY(-1px);
+        }
+
+        .button-primary::after {
+            content: "→";
+            margin-left: 2px;
+            transition: transform 0.18s ease;
+        }
+
+        .button-primary:hover::after {
+            transform: translateX(2px);
+        }
+
+        .drawer-mask {
+            position: fixed;
+            inset: 0;
+            z-index: 50;
+            display: none;
+            background: rgba(3, 7, 12, 0.68);
+            backdrop-filter: blur(10px);
+        }
+
+        .drawer-mask.active {
+            display: block;
+        }
+
+        .drawer {
+            position: fixed;
+            top: 0;
+            right: 0;
+            z-index: 51;
+            width: min(760px, 92vw);
+            height: 100vh;
+            transform: translateX(100%);
+            transition: transform 0.28s ease;
+            background: rgba(12, 17, 26, 0.98);
+            border-left: 1px solid var(--line);
+            box-shadow: -28px 0 70px rgba(0, 0, 0, 0.32);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .drawer.active {
+            transform: translateX(0);
+        }
+
+        .drawer-head {
+            padding: 24px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+            display: flex;
+            justify-content: space-between;
+            gap: 18px;
+            align-items: flex-start;
+        }
+
+        .drawer-kicker {
+            color: var(--muted);
+            font-size: 12px;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .drawer-title {
+            font-size: 24px;
+            font-weight: 850;
+            letter-spacing: -0.03em;
+        }
+
+        .drawer-desc {
+            margin-top: 8px;
+            color: var(--muted);
+            line-height: 1.7;
+        }
+
+        .drawer-close {
+            flex: 0 0 auto;
+            width: 40px;
+            height: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.09);
+            border-radius: 12px;
+            color: #dce8ff;
+            background: rgba(255, 255, 255, 0.04);
+            cursor: pointer;
+            font-size: 20px;
+        }
+
+        .repo-summary {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 10px;
+            padding: 16px 24px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+        }
+
+        .repo-pill {
+            padding: 16px 18px;
+            border-radius: 18px;
+            color: var(--soft);
+            background: var(--bg-card-soft);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 12px;
+        }
+
+        .repo-pill strong {
+            display: block;
+            color: var(--text);
+            font-size: 15px;
+            margin-bottom: 3px;
+        }
+
+        .file-browser {
+            flex: 1;
+            min-height: 0;
+            overflow: auto;
+            padding: 20px 24px 28px;
+        }
+
+        .file-toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+            padding: 12px 14px;
+            border-radius: 16px;
+            background: var(--panel);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+        }
+
+        .branch-chip {
+            color: #dce8ff;
+            font-size: 13px;
+            font-weight: 800;
+        }
+
+        .file-count {
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        .tree {
+            overflow: hidden;
+            border-radius: 18px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: var(--bg-card-soft);
+        }
+
+        .tree-row {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 12px;
+            align-items: center;
+            min-height: 44px;
+            padding: 10px 14px;
+            color: #dce8ff;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.055);
+        }
+
+        .tree-row:last-child {
+            border-bottom: 0;
+        }
+
+        .tree-row:hover {
+            background: rgba(120, 166, 255, 0.08);
+        }
+
+        .tree-name {
+            min-width: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .tree-path {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .tree-size {
+            color: var(--muted);
+            font-size: 12px;
+            white-space: nowrap;
+        }
+
+        .folder-row {
+            color: var(--orange);
+            background: rgba(255, 208, 138, 0.045);
+        }
+
+        @media (max-width: 980px) {
+            .hero-content {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .skill-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 680px) {
+            .top-tabs {
+                padding: 12px 16px;
+            }
+
+            .page-shell {
+                padding: 24px 16px 48px;
+            }
+
+            .meta-grid,
+            .repo-summary {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: 30px;
+            }
+
+            .hero-copy {
+                font-size: 16px;
+            }
+
+            .skill-card {
+                min-height: auto;
+                padding: 20px;
+                border-radius: 20px;
+            }
+
+            .button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="top-tabs-wrap">
+        <nav class="top-tabs" aria-label="页面导航">
+            <a class="top-tab" href="index.html#resume-home">简历主页</a>
+            <a class="top-tab" href="vibe_coding_apps.html">Vibe Coding的应用</a>
+            <a class="top-tab active" href="skill_library.html">封装的Skill</a>
+        </nav>
+    </div>
+
+    <main class="page-shell">
+        <section class="hero">
+            <div class="hero-content">
+                <div class="hero-main">
+                    <h1>封装的 Skill</h1>
+                    <p class="hero-copy">把 AI 产品调研、竞品分析等方法论封装成可查看、可下载的 Skill，方便面试官快速了解我的结构化方法、交付习惯与可复用能力。</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="section-head">
+                <div>
+                    <div class="section-title">Skill 列表</div>
+                    <div class="section-subtitle">默认以卡片展示，点击查看后可像浏览代码仓库一样查看目录和文件。</div>
+                </div>
+            </div>
+
+            <div class="skill-grid" id="skillGrid"></div>
+        </section>
+    </main>
+
+    <div class="drawer-mask" id="drawerMask"></div>
+    <aside class="drawer" id="fileDrawer" aria-hidden="true">
+        <div class="drawer-head">
+            <div>
+                <div class="drawer-kicker">Repository Preview</div>
+                <div class="drawer-title" id="drawerTitle">Skill 文件</div>
+                <div class="drawer-desc" id="drawerDesc">查看该 Skill 的文件结构。</div>
+            </div>
+            <button class="drawer-close" type="button" id="drawerClose" aria-label="关闭">×</button>
+        </div>
+        <div class="repo-summary">
+            <div class="repo-pill"><strong id="repoFiles">0</strong>文件数</div>
+            <div class="repo-pill"><strong id="repoSize">0K</strong>下载大小</div>
+            <div class="repo-pill"><strong id="repoAuthor">管开祥</strong>作者</div>
+        </div>
+        <div class="file-browser">
+            <div class="file-toolbar">
+                <div class="branch-chip" id="repoSlug">main</div>
+                <div class="file-count" id="repoCountText">0 files</div>
+            </div>
+            <div class="tree" id="fileTree"></div>
+        </div>
+    </aside>
+
+    <script>
+        const skillData = [
+            {
+                id: "ai-product-research-methodology",
+                title: "AI产品调研",
+                slug: "ai-product-research-methodology",
+                author: "管开祥",
+                version: "v1.0",
+                accent: "#75a7ff",
+                icon: "research",
+                fileCount: 3,
+                packageSize: "8K",
+                download: "downloads/ai-product-research-methodology-skill.zip",
+                description: "系统化拆解 AI 产品的研究框架、测试方法与输出方式，适合做 AI 产品体验评估、能力评测和汇报结论沉淀。",
+                prompt: "使用 $ai-product-research-methodology 帮我系统评估这个 AI 产品，从战略、体验、商业和能力四层输出结论。",
+                tags: ["AI产品研究", "能力评测", "调研画布", "产品方法论"],
+                files: [
+                    { path: "SKILL.md", size: 2603 },
+                    { path: "agents/openai.yaml", size: 303 },
+                    { path: "references/research-framework.md", size: 8163 },
+                ],
+            },
+            {
+                id: "pm-competitive-analysis",
+                title: "竞品分析",
+                slug: "pm-competitive-analysis",
+                author: "管开祥",
+                version: "v1.0",
+                accent: "#53d7d0",
+                icon: "compete",
+                fileCount: 19,
+                packageSize: "60K",
+                download: "downloads/pm-competitive-analysis-skill.zip",
+                description: "从产品经理视角完成竞品分析、产品对比、市场格局梳理、机会点判断和汇报型总结，强调收敛目标与输出行动建议。",
+                prompt: "使用 $pm-competitive-analysis 帮我从产品经理视角分析这个赛道的竞品格局，并输出关键差异、机会点和建议。",
+                tags: ["竞品拆解", "市场格局", "产品对比", "机会点分析"],
+                files: [
+                    { path: "SKILL.md", size: 17740 },
+                    { path: "agents/openai.yaml", size: 299 },
+                    { path: "assets/report-input-example.json", size: 13557 },
+                    { path: "assets/report-input-template.json", size: 7015 },
+                    { path: "assets/sample-ai-notes-analysis.json", size: 8152 },
+                    { path: "references/analysis-goals.md", size: 3558 },
+                    { path: "references/company-product-path.md", size: 8924 },
+                    { path: "references/competition-factors.md", size: 2593 },
+                    { path: "references/core-scenario-selection.md", size: 2012 },
+                    { path: "references/data-evidence.md", size: 2579 },
+                    { path: "references/dimension-library.md", size: 6394 },
+                    { path: "references/example-scenarios.md", size: 9153 },
+                    { path: "references/html-report-spec.md", size: 6820 },
+                    { path: "references/market-landscape.md", size: 7161 },
+                    { path: "references/moat-business-revenue.md", size: 5937 },
+                    { path: "references/output-templates.md", size: 3810 },
+                    { path: "references/sector-scoping.md", size: 2750 },
+                    { path: "references/user-and-goal-selection.md", size: 2858 },
+                    { path: "scripts/render_html_report.py", size: 32471 },
+                ],
+            },
+        ];
+
+        const grid = document.getElementById("skillGrid");
+        const drawer = document.getElementById("fileDrawer");
+        const drawerMask = document.getElementById("drawerMask");
+        const drawerClose = document.getElementById("drawerClose");
+        const drawerTitle = document.getElementById("drawerTitle");
+        const drawerDesc = document.getElementById("drawerDesc");
+        const repoFiles = document.getElementById("repoFiles");
+        const repoSize = document.getElementById("repoSize");
+        const repoAuthor = document.getElementById("repoAuthor");
+        const repoSlug = document.getElementById("repoSlug");
+        const repoCountText = document.getElementById("repoCountText");
+        const fileTree = document.getElementById("fileTree");
+
+        function iconSvg(type) {
+            if (type === "compete") {
+                return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19V5"/><path d="M4 19h16"/><path d="m7 15 4-4 3 3 5-7"/><path d="M18 7h1v5"/></svg>`;
+            }
+
+            return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/><path d="M8.5 11h5"/><path d="M11 8.5v5"/></svg>`;
+        }
+
+        function formatBytes(bytes) {
+            if (bytes < 1024) return `${bytes} B`;
+            return `${(bytes / 1024).toFixed(bytes > 10240 ? 0 : 1)} KB`;
+        }
+
+        function getFolders(files) {
+            const folders = new Set();
+            files.forEach(file => {
+                const parts = file.path.split("/");
+                parts.pop();
+                let current = "";
+                parts.forEach(part => {
+                    current = current ? `${current}/${part}` : part;
+                    folders.add(current);
+                });
+            });
+            return [...folders].sort();
+        }
+
+        function renderCards() {
+            grid.innerHTML = skillData.map((skill, index) => `
+                <article class="skill-card" style="--accent:${skill.accent}">
+                    <div class="skill-card-main">
+                        <div class="skill-topline">
+                            <div class="skill-icon" aria-hidden="true">${iconSvg(skill.icon)}</div>
+                            <div class="skill-badge">S${index + 1}</div>
+                        </div>
+                        <h2>${skill.title}</h2>
+                        <div class="skill-slug">${skill.tags.slice(0, 2).join(" · ")}</div>
+                        <p class="skill-desc">${skill.description}</p>
+                        <div class="meta-grid">
+                            <div class="meta-item">
+                                <div class="meta-label">作者</div>
+                                <div class="meta-value"> ${skill.author}</div>
+                            </div>
+                            <div class="meta-item">
+                                <div class="meta-label">文件</div>
+                                <div class="meta-value"> ${skill.fileCount} 个</div>
+                            </div>
+                            <div class="meta-item">
+                                <div class="meta-label">下载包</div>
+                                <div class="meta-value"> ${skill.packageSize}</div>
+                            </div>
+                        </div>
+                        <div class="tag-list">
+                            ${skill.tags.map(tag => `<span class="tag">${tag}</span>`).join("")}
+                        </div>
+                    </div>
+                    <div class="card-actions">
+                        <button class="button button-primary" type="button" data-view="${skill.id}">查看文件</button>
+                        <a class="button button-secondary" href="${skill.download}" download>下载 Skill</a>
+                    </div>
+                </article>
+            `).join("");
+
+            document.querySelectorAll("[data-view]").forEach(button => {
+                button.addEventListener("click", () => {
+                    const skill = skillData.find(item => item.id === button.dataset.view);
+                    if (skill) openDrawer(skill);
+                });
+            });
+        }
+
+        function renderTree(skill) {
+            const folders = getFolders(skill.files);
+            const folderRows = folders.map(folder => `
+                <div class="tree-row folder-row">
+                    <div class="tree-name"><span>folder</span><span class="tree-path">${folder}/</span></div>
+                    <div class="tree-size">directory</div>
+                </div>
+            `);
+
+            const fileRows = skill.files.map(file => `
+                <a class="tree-row" href="skill/${skill.slug}/${file.path}" target="_blank" rel="noopener">
+                    <div class="tree-name"><span>file</span><span class="tree-path">${file.path}</span></div>
+                    <div class="tree-size">${formatBytes(file.size)}</div>
+                </a>
+            `);
+
+            fileTree.innerHTML = [...folderRows, ...fileRows].join("");
+        }
+
+        function openDrawer(skill) {
+            drawerTitle.textContent = skill.title;
+            drawerDesc.textContent = skill.description;
+            repoFiles.textContent = `${skill.fileCount}`;
+            repoSize.textContent = skill.packageSize;
+            repoAuthor.textContent = skill.author;
+            repoSlug.textContent = skill.slug;
+            repoCountText.textContent = `${skill.fileCount} files`;
+            renderTree(skill);
+
+            drawerMask.classList.add("active");
+            drawer.classList.add("active");
+            drawer.setAttribute("aria-hidden", "false");
+        }
+
+        function closeDrawer() {
+            drawerMask.classList.remove("active");
+            drawer.classList.remove("active");
+            drawer.setAttribute("aria-hidden", "true");
+        }
+
+        drawerClose.addEventListener("click", closeDrawer);
+        drawerMask.addEventListener("click", closeDrawer);
+        window.addEventListener("keydown", event => {
+            if (event.key === "Escape") closeDrawer();
+        });
+
+        renderCards();
+    </script>
+</body>
+</html>

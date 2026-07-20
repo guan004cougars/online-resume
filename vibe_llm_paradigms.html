@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LLM范式平台 | 详情</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #0a0e16;
+            --panel: #131927;
+            --card: #171e2b;
+            --line: rgba(255, 255, 255, 0.08);
+            --text-primary: #f4f7fb;
+            --text-secondary: #a5afc3;
+            --text-muted: #768198;
+            --blue: #7c9cff;
+            --cyan: #5dd6c4;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Noto Sans", sans-serif;
+            background:
+                radial-gradient(circle at top right, rgba(93, 214, 196, 0.08), transparent 18%),
+                linear-gradient(180deg, #090d14 0%, #0b1018 100%);
+            color: var(--text-primary);
+        }
+
+        .page-shell {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 28px 24px 56px;
+        }
+
+        .back-link {
+            display: none;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 14px;
+            border-radius: 999px;
+            text-decoration: none;
+            color: #dce6fb;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: 0.2s ease;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 18px;
+        }
+
+        .back-link:hover {
+            transform: translateY(-1px);
+            border-color: rgba(124, 156, 255, 0.28);
+            background: rgba(124, 156, 255, 0.08);
+        }
+
+        .intro-panel {
+            padding: 24px 0 10px;
+        }
+
+        .intro-title {
+            font-size: clamp(30px, 5vw, 48px);
+            line-height: 1.08;
+            letter-spacing: -0.04em;
+            margin-bottom: 14px;
+        }
+
+        .intro-copy {
+            max-width: 980px;
+            color: var(--text-secondary);
+            font-size: 18px;
+            line-height: 1.9;
+        }
+
+        .intro-copy strong {
+            color: var(--text-primary);
+            font-weight: 700;
+        }
+
+        .section-block {
+            margin-top: 26px;
+        }
+
+        .section-header {
+            padding-bottom: 14px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            margin-bottom: 18px;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 18px;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .section-subtitle {
+            color: var(--text-muted);
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 16px;
+        }
+
+        .paradigm-card {
+            background: var(--card);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 18px;
+            padding: 18px 20px 20px;
+            min-height: 286px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .paradigm-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--accent);
+        }
+
+        .card-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+
+        .card-icon {
+            font-size: 28px;
+            line-height: 1;
+        }
+
+        .card-code {
+            color: #7e89a0;
+            font-size: 14px;
+        }
+
+        .card-title {
+            font-size: 20px;
+            font-weight: 800;
+            line-height: 1.25;
+            margin-bottom: 8px;
+        }
+
+        .card-meta {
+            color: var(--accent);
+            font-size: 14px;
+            line-height: 1.7;
+            margin-bottom: 12px;
+        }
+
+        .card-desc {
+            color: var(--text-secondary);
+            font-size: 14px;
+            line-height: 1.85;
+            flex: 1;
+        }
+
+        .card-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            margin-top: 18px;
+            padding-top: 14px;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .action-link {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex: 1;
+            min-height: 38px;
+            padding: 8px 15px;
+            border-radius: 999px;
+            border: 1px solid color-mix(in srgb, var(--accent) 42%, rgba(255, 255, 255, 0.08));
+            background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 22%, transparent), rgba(255, 255, 255, 0.045));
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 12px 30px -24px var(--accent);
+            color: #eef4ff;
+            text-decoration: none;
+            font-size: 13.5px;
+            font-weight: 800;
+            transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+        }
+
+        .action-link::after {
+            content: "→";
+            margin-left: 7px;
+            transition: transform 0.18s ease;
+        }
+
+        .action-link:hover {
+            transform: translateY(-1px);
+            border-color: color-mix(in srgb, var(--accent) 72%, white);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), 0 16px 34px -24px var(--accent);
+        }
+
+        .action-link:hover::after {
+            transform: translateX(3px);
+        }
+
+        .action-chip {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 38px;
+            padding: 8px 14px;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.105);
+            color: #b8c3d9;
+            background: rgba(255, 255, 255, 0.025);
+            font-size: 12.8px;
+            font-weight: 650;
+            white-space: nowrap;
+            transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease, color 0.18s ease;
+        }
+
+        .action-chip:hover {
+            transform: translateY(-1px);
+            color: #f4f7fb;
+            border-color: color-mix(in srgb, var(--accent) 42%, rgba(255, 255, 255, 0.08));
+            background: color-mix(in srgb, var(--accent) 10%, rgba(255, 255, 255, 0.03));
+        }
+
+        @media (max-width: 1180px) {
+            .card-grid {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 980px) {
+            .card-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 680px) {
+            .page-shell {
+                padding: 18px 16px 40px;
+            }
+
+            .intro-copy {
+                font-size: 16px;
+            }
+
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .paradigm-card {
+                min-height: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="page-shell">
+        <a class="back-link" href="vibe_coding_apps.html">
+            <span>←</span>
+            <span>返回</span>
+        </a>
+
+        <section class="intro-panel">
+            <h1 class="intro-title">LLM 范式平台</h1>
+            <p class="intro-copy">按「LLM 在产品里扮演什么角色」切分出 <strong>toC 7 种 + toB 7 种</strong> 范式。每张卡片背后是一个<strong>真实调用大模型</strong>的可玩 demo + 一页产品方法论。</p>
+        </section>
+
+        <section class="section-block">
+            <div class="section-header">
+                <div class="section-title">👤 面向消费者 · toC</div>
+                <div class="section-subtitle">模型在产品里扮演什么角色 —— 从「模型即界面」到「模型是隐形引擎」</div>
+            </div>
+            <div class="card-grid">
+                <article class="paradigm-card" style="--accent:#7c9cff;">
+                    <div class="card-top"><div class="card-icon">💬</div><div class="card-code">C1</div></div>
+                    <div class="card-title">对话即产品</div>
+                    <div class="card-meta">Chat-native ・ 模型即界面</div>
+                    <div class="card-desc">LLM 本身就是产品。用户自带任务，直接对话。代表：ChatGPT、Claude、豆包。</div>
+                    <div class="card-actions"><a class="action-link" href="#">进入 demo →</a><span class="action-chip">方法论</span></div>
+                </article>
+                <article class="paradigm-card" style="--accent:#ff8fab;">
+                    <div class="card-top"><div class="card-icon">🫂</div><div class="card-code">C2</div></div>
+                    <div class="card-title">角色陪伴</div>
+                    <div class="card-meta">Companion ・ 卖情感关系</div>
+                    <div class="card-desc">把模型包装成有人格的角色，卖陪伴而非效率。代表：Character.AI、星野。</div>
+                    <div class="card-actions"><a class="action-link" href="#">进入 demo →</a><span class="action-chip">方法论</span></div>
+                </article>
+                <article class="paradigm-card" style="--accent:#ffc777;">
+                    <div class="card-top"><div class="card-icon">🎨</div><div class="card-code">C3</div></div>
+                    <div class="card-title">创作工具</div>
+                    <div class="card-meta">Co-creation ・ 要产出物</div>
+                    <div class="card-desc">模型作为生产力工具，用户要的是可反复打磨的产出。代表：Notion AI、文案/图像生成。</div>
+                    <div class="card-actions"><a class="action-link" href="#">进入 demo →</a><span class="action-chip">方法论</span></div>
+                </article>
+                <article class="paradigm-card" style="--accent:#82e0aa;">
+                    <div class="card-top"><div class="card-icon">✍️</div><div class="card-code">C4</div></div>
+                    <div class="card-title">嵌入式 Copilot</div>
+                    <div class="card-meta">Copilot ・ 增强已有操作</div>
+                    <div class="card-desc">把 AI 塞进已有高频场景，0 迁移成本。代表：浏览器侧栏、文档助手、输入法 AI。</div>
+                    <div class="card-actions"><a class="action-link" href="#">进入 demo →</a><span class="action-chip">方法论</span></div>
+                </article>
+                <article class="paradigm-card" style="--accent:#c39bd3;">
+                    <div class="card-top"><div class="card-icon">🤖</div><div class="card-code">C5</div></div>
+                    <div class="card-title">任务代理 Agent</div>
+                    <div class="card-meta">Agent ・ 替你把事办完</div>
+                    <div class="card-desc">给目标，模型自己拆解、分步执行、交付结果。代表：Manus、Deep Research。</div>
+                    <div class="card-actions"><a class="action-link" href="#">进入 demo →</a><span class="action-chip">方法论</span></div>
+                </article>
+                <article class="paradigm-card" style="--accent:#5dd6c4;">
+                    <div class="card-top"><div class="card-icon">🔍</div><div class="card-code">C6</div></div>
+                    <div class="card-title">答案引擎</div>
+                    <div class="card-meta">AI-native rebuild ・ 用 AI 重做老品类</div>
+                    <div class="card-desc">AI 藏在背后，对标某个老品类拉开体验代差。代表：Perplexity 重做搜索。</div>
+                    <div class="card-actions"><a class="action-link" href="#">进入 demo →</a><span class="action-chip">方法论</span></div>
+                </article>
+                <article class="paradigm-card" style="--accent:#f1948a;">
+                    <div class="card-top"><div class="card-icon">🔀</div><div class="card-code">C7</div></div>
+                    <div class="card-title">聚合 / 路由层</div>
+                    <div class="card-meta">Meta layer ・ 卡在用户与模型间</div>
+                    <div class="card-desc">聚合多模型做分发与对比，收过路费。代表：Poe、各类全家桶入口。</div>
+                    <div class="card-actions"><a class="action-link" href="#">进入 demo →</a><span class="action-chip">方法论</span></div>
+                </article>
+            </div>
+        </section>
+
+        <section class="section-block">
+            <div class="section-header">
+                <div class="section-title">🏢 面向企业 · toB</div>
+                <div class="section-subtitle">把大模型能力嵌入企业工作流 —— 知识、副驾、客服、流程、分析、文档、平台</div>
+            </div>
+            <div class="card-grid">
+                <article class="paradigm-card" style="--accent:#5dd6c4;">
+                    <div class="card-top"><div class="card-icon">🗄️</div><div class="card-code">B1</div></div>
+                    <div class="card-title">企业知识库问答</div>
+                    <div class="card-meta">Enterprise RAG ・ 让企业文档可问答</div>
+                    <div class="card-desc">把散落的企业文档变成可问答、可溯源的知识中枢。代表：Glean、各类知识中台。</div>
+                    <div class="card-actions"><a class="action-link" href="#">进入 demo →</a><span class="action-chip">方法论</span></div>
+                </article>
+                <article class="paradigm-card" style="--accent:#7c9cff;">
+                    <div class="card-top"><div class="card-icon">🧑‍💼</div><div class="card-code">B2</div></div>
+                    <div class="card-title">行业 SaaS 副驾</div>
+                    <div class="card-meta">Vertical Copilot ・ 嵌入业务系统</div>
+                    <div class="card-desc">深度嵌入 CRM/HR/法务等业务系统的垂直副驾，读写业务对象。代表：销售/客服 Copilot。</div>
+                    <div class="card-actions"><a class="action-link" href="#">进入 demo →</a><span class="action-chip">方法论</span></div>
+                </article>
+                <article class="paradigm-card" style="--accent:#82e0aa;">
+                    <div class="card-top"><div class="card-icon">🎧</div><div class="card-code">B3</div></div>
+                    <div class="card-title">智能客服</div>
+                    <div class="card-meta">AI Support ・ 自动应答+坐席辅助</div>
+                    <div class="card-desc">知识驱动的自动应答 + 坐席实时辅助，可溯源、可转人工。代表：各家 AI 客服。</div>
+                    <div class="card-actions"><a class="action-link" href="#">进入 demo →</a><span class="action-chip">方法论</span></div>
+                </article>
+                <article class="paradigm-card" style="--accent:#c39bd3;">
+                    <div class="card-top"><div class="card-icon">⚙️</div><div class="card-code">B4</div></div>
+                    <div class="card-title">流程自动化 Agent</div>
+                    <div class="card-meta">Process Agent ・ 跨系统执行业务流程</div>
+                    <div class="card-desc">给目标，Agent 跨系统拆解执行业务流程，不可逆动作人工审批。代表：AI 运营/RPA。</div>
+                    <div class="card-actions"><a class="action-link" href="#">进入 demo →</a><span class="action-chip">方法论</span></div>
+                </article>
+                <article class="paradigm-card" style="--accent:#ffc777;">
+                    <div class="card-top"><div class="card-icon">📈</div><div class="card-code">B5</div></div>
+                    <div class="card-title">对话式数据分析</div>
+                    <div class="card-meta">Conversational BI ・ 自然语言查数出报表</div>
+                    <div class="card-desc">自然语言转 SQL、自助查数出报表，降低看数门槛。代表：各家 NL2SQL / AI BI。</div>
+                    <div class="card-actions"><a class="action-link" href="#">进入 demo →</a><span class="action-chip">方法论</span></div>
+                </article>
+                <article class="paradigm-card" style="--accent:#ff8fab;">
+                    <div class="card-top"><div class="card-icon">📑</div><div class="card-code">B6</div></div>
+                    <div class="card-title">文档智能</div>
+                    <div class="card-meta">Document Intelligence ・ 抽取·审阅·比对</div>
+                    <div class="card-desc">对合同/发票/报告做要素抽取、风险审阅、版本比对，人审复核闭环。代表：合同智审。</div>
+                    <div class="card-actions"><a class="action-link" href="#">进入 demo →</a><span class="action-chip">方法论</span></div>
+                </article>
+                <article class="paradigm-card" style="--accent:#f1948a;">
+                    <div class="card-top"><div class="card-icon">🏗️</div><div class="card-code">B7</div></div>
+                    <div class="card-title">企业 AI 平台</div>
+                    <div class="card-meta">LLMOps Platform ・ 模型与 Agent 治理</div>
+                    <div class="card-desc">统一模型接入、Agent 编排、评测监控与护栏治理的企业 AI 中台。代表：各家 LLMOps。</div>
+                    <div class="card-actions"><a class="action-link" href="#">进入 demo →</a><span class="action-chip">方法论</span></div>
+                </article>
+            </div>
+        </section>
+    </main>
+    <script>
+        const paradigmIds = [
+            'chat', 'companion', 'create', 'copilot', 'agent', 'answer', 'router',
+            'rag', 'bizcopilot', 'support', 'bizagent', 'bi', 'docintel', 'platform',
+        ];
+
+        function navigateTop(href) {
+            const targetWindow = window.top && window.top !== window ? window.top : window;
+            targetWindow.location.href = href;
+        }
+
+        document.querySelectorAll('.paradigm-card').forEach((card, index) => {
+            const id = paradigmIds[index];
+            if (!id) return;
+
+            const demoLink = card.querySelector('.action-link');
+            const guideChip = card.querySelector('.action-chip');
+            const demoHref = `llm-paradigms-app/#/p/${id}`;
+            const guideHref = `llm-paradigms-app/#/guide/${id}`;
+
+            demoLink.href = demoHref;
+            demoLink.target = '_top';
+            guideChip.tabIndex = 0;
+            guideChip.role = 'link';
+            guideChip.style.cursor = 'pointer';
+            guideChip.addEventListener('click', () => {
+                navigateTop(guideHref);
+            });
+            guideChip.addEventListener('keydown', (event) => {
+                if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    navigateTop(guideHref);
+                }
+            });
+
+            card.style.cursor = 'pointer';
+            card.addEventListener('click', (event) => {
+                if (event.target.closest('a') || event.target.closest('.action-chip')) return;
+                navigateTop(demoHref);
+            });
+        });
+    </script>
+</body>
+</html>

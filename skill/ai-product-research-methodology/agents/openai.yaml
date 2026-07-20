@@ -1,0 +1,4 @@
+interface:
+  display_name: "AI 产品调研方法论"
+  short_description: "系统化拆解 AI 产品的研究框架、测试方法与输出方式"
+  default_prompt: "使用 $ai-product-research-methodology 帮我系统评估这个 AI 产品，从战略、体验、商业和能力四层输出结论。"

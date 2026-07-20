@@ -1,0 +1,217 @@
+{
+  "title": "这里填写报告标题",
+  "generated_at": "YYYY-MM-DD HH:MM",
+  "goal": "这里填写本次分析目标",
+  "summary": "这里填写一句话结论",
+  "target_market": {
+    "market_definition": "这里定义目标市场",
+    "why_this_market_exists": "这里说明这个市场为什么成立",
+    "key_pain_points": [
+      "痛点 1",
+      "痛点 2"
+    ],
+    "hard_need_assessment": "这里判断这个市场需求是否刚需，以及为什么",
+    "market_size": "这里填写行业规模",
+    "market_growth": "这里填写行业增速",
+    "core_needs": [
+      "需求 1",
+      "需求 2"
+    ]
+  },
+  "user_personas": [
+    {
+      "name": "画像名称",
+      "role": "角色/岗位",
+      "why_use": "为什么会使用这类产品",
+      "core_needs": [
+        "核心需求 1",
+        "核心需求 2"
+      ],
+      "decision_weight": "高/中/低"
+    }
+  ],
+  "competition_factors": [
+    {
+      "name": "竞争要素 1",
+      "description": "解释这个竞争要素为什么重要"
+    },
+    {
+      "name": "竞争要素 2",
+      "description": "解释这个竞争要素为什么重要"
+    }
+  ],
+  "market_landscape": {
+    "summary": "一句话概括当前市场竞争格局",
+    "quadrant": {
+      "title": "二维四象限定位",
+      "x_axis": "X 轴含义",
+      "y_axis": "Y 轴含义",
+      "axis_source_factors": [
+        "这个轴来自的市场竞争要素 1",
+        "这个轴来自的市场竞争要素 2"
+      ],
+      "axis_selection_reason": "为什么这次从多个竞争要素里选这两个做坐标轴",
+      "items": [
+        {
+          "name": "企业/产品/业务形态名称",
+          "type": "企业/产品/业务形态/替代方案",
+          "quadrant": "左上/右上/左下/右下",
+          "x": 20,
+          "y": 80,
+          "color": "#4f86c6",
+          "size": 18,
+          "description": "为什么在这个位置"
+        }
+      ]
+    },
+    "market_share_distribution": [
+      {
+        "tier": "头部/中部/长尾",
+        "players": "主要玩家",
+        "share_percent": 40,
+        "color": "#4f86c6",
+        "share_or_scale": "份额或规模描述",
+        "description": "这一层的特点"
+      }
+    ],
+    "market_structure_type": "垄断型/寡头型/分散型/长尾分散型",
+    "market_structure_assessment": "这里用一句或两句话，对市场份额结构做定性判断",
+    "market_layers": [
+      {
+        "name": "玩家层级名称",
+        "description": "这层玩家如何竞争"
+      }
+    ],
+    "gaps": [
+      "市场空位 1",
+      "市场空位 2"
+    ],
+    "trends": [
+      "竞争趋势 1",
+      "竞争趋势 2"
+    ]
+  },
+  "competitors": [
+    {
+      "name": "竞品名称",
+      "positioning": "产品定位",
+      "company": "所属企业",
+      "target_users": "目标用户",
+      "core_scenarios": "核心场景",
+      "what_it_does": "这个产品/业务具体做什么",
+      "why_users_choose_it": "目标用户为什么会选择它",
+      "pain_point_solved": "它主要解决了用户什么痛点",
+      "hard_need_assessment": "这个需求是否属于强刚需/中强需求/锦上添花",
+      "competition_factors": [
+        "该竞品重点竞争要素 1",
+        "该竞品重点竞争要素 2"
+      ],
+      "capabilities": "主要能力概述",
+      "workflow": "关键流程概述",
+      "moat_summary": "一句话概括核心壁垒",
+      "moat_sources": [
+        {
+          "type": "数据智能/网络协同/资源优势/政策要素/创始人能力/独门技术/品牌心智",
+          "detail": "这个壁垒具体体现在哪里"
+        }
+      ],
+      "why_it_can_win": "为什么只有它更有机会做成",
+      "business_logic": "这个业务的核心逻辑是什么",
+      "business_model": "商业模式是什么",
+      "profit_model": "具体怎么挣钱",
+      "growth_flywheel": "增长闭环或飞轮",
+      "model_type": "自生型/内耗型/混合型",
+      "ceiling_risk": "盈利模式可能遇到的天花板或风险",
+      "revenue_structure_summary": "收入结构总体判断",
+      "revenue_streams": [
+        {
+          "name": "收入项名称",
+          "share": "占比",
+          "amount": "收入规模",
+          "description": "这个收入项具体是什么",
+          "strategic_focus": "它反映企业在哪发力",
+          "competitors": "这一收入方向上的竞争对手是谁"
+        }
+      ],
+      "patient_reach": "患者如何被触达",
+      "acquisition": "企业如何获客",
+      "retention": "如何留存",
+      "conversion": "如何转化或商业化",
+      "delivery_model": "交付方式/部署方式",
+      "monetization": "变现方式",
+      "company_role_in_business": "这个产品/业务在企业整体版图中的角色",
+      "key_metrics": [
+        {
+          "name": "指标名称",
+          "value": "指标值",
+          "note": "指标说明"
+        }
+      ],
+      "company_path_summary": "企业发展路径摘要",
+      "product_iteration_summary": "产品核心迭代路径摘要",
+      "company_product_path": {
+        "overall_judgment": "先用一句话概括这个企业/产品总体是沿什么路径演化的",
+        "stages": [
+          {
+            "stage": "阶段名称",
+            "period": "YYYY-YYYY 或 YYYY-MM 至 YYYY-MM",
+            "strategy_theme": "这一阶段的核心主题",
+            "what_happened": "这一阶段发生了什么",
+            "decision_logic": "为什么做这个决定，背后的业务逻辑是什么",
+            "why_now": "为什么是这个时间点",
+            "impact_on_product": "如何改变产品形态、用户结构或商业模式",
+            "business_signal": "暴露出的战略信号",
+            "next_inference": "对下一步可能走向的推演"
+          }
+        ]
+      },
+      "company_timeline": [
+        {
+          "date": "YYYY 或 YYYY-MM",
+          "title": "关键节点标题",
+          "description": "这个节点对企业或产品意味着什么"
+        }
+      ],
+      "strengths": [
+        "优势 1",
+        "优势 2"
+      ],
+      "weaknesses": [
+        "短板 1",
+        "短板 2"
+      ]
+    }
+  ],
+  "comparison_matrix": [
+    {
+      "name": "竞品名称",
+      "factor_performance": "在关键竞争要素上的表现",
+      "business_logic": "业务核心逻辑摘要",
+      "company_path": "企业路径或战略变化摘要",
+      "summary": "总体判断"
+    }
+  ],
+  "industry_timeline": [
+    {
+      "date": "YYYY 或 YYYY-MM",
+      "title": "关键事件标题",
+      "description": "该事件如何影响行业"
+    }
+  ],
+  "insights": [
+    "关键洞察 1",
+    "关键洞察 2"
+  ],
+  "recommendations": [
+    "建议 1",
+    "建议 2"
+  ],
+  "sources": [
+    {
+      "name": "来源名称",
+      "type": "官方披露/行业报告/第三方平台/媒体",
+      "period": "来源时间",
+      "note": "来源用途或口径说明"
+    }
+  ]
+}

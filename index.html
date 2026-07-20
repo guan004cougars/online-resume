@@ -1,0 +1,2827 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>管开祥 - AI产品经理 | 在线简历</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-color: #0a0d14;
+            --bg-secondary: rgba(23, 31, 49, 0.84);
+            --bg-card: rgba(18, 24, 38, 0.92);
+            --bg-card-soft: rgba(23, 31, 49, 0.84);
+            --text-primary: #f8fbff;
+            --text-secondary: #9aa6bf;
+            --text-muted: #6f7a92;
+            --accent-blue: #78a6ff;
+            --accent-green: #5de6a5;
+            --accent-cyan: #57d7d0;
+            --border-color: rgba(139, 170, 255, 0.16);
+            --gradient-blue: linear-gradient(135deg, #78a6ff, #57d7d0);
+            --panel: linear-gradient(145deg, rgba(25, 35, 58, 0.98), rgba(14, 19, 31, 0.95));
+        }
+
+        html {
+            scroll-behavior: smooth;
+            min-height: 100%;
+            background-color: #0c1018;
+            background-image: linear-gradient(180deg, #090c13 0%, #0c1018 100%);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif;
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--text-primary);
+            min-height: 100vh;
+            background-color: #0c1018;
+            background-image: linear-gradient(180deg, #090c13 0%, #0c1018 100%);
+        }
+
+        .top-tabs-wrap {
+            position: sticky;
+            top: 0;
+            z-index: 30;
+            backdrop-filter: blur(16px);
+            background: #0c1018;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .top-tabs {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 14px 24px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            overflow-x: auto;
+        }
+
+        .top-tab {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            white-space: nowrap;
+            padding: 10px 16px;
+            border-radius: 999px;
+            text-decoration: none;
+            color: var(--text-secondary);
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid transparent;
+            transition: all 0.2s ease;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .top-tab:hover,
+        .top-tab.active {
+            color: var(--text-primary);
+            border-color: rgba(120, 166, 255, 0.28);
+            background: rgba(120, 166, 255, 0.12);
+        }
+
+        #resume-home,
+        #skill-library,
+        #vibe-coding-apps {
+            scroll-margin-top: 84px;
+        }
+
+        .app-container {
+            display: grid;
+            grid-template-columns: 320px 1fr 400px;
+            grid-template-rows: auto 1fr;
+            grid-template-areas:
+                "profile profile core-skills"
+                "sidebar-left main-content sidebar-right";
+            max-width: 1440px;
+            margin: 0 auto;
+            min-height: 100vh;
+            padding: 32px 24px;
+            gap: 24px;
+        }
+
+        .profile-area {
+            grid-area: profile;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .profile-card {
+            background: var(--panel);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 24px 48px rgba(0, 0, 0, 0.24);
+            border-radius: 16px;
+            padding: 28px;
+        }
+
+        .sidebar-left {
+            grid-area: sidebar-left;
+            position: sticky;
+            top: 32px;
+            height: fit-content;
+        }
+
+        .main-content {
+            grid-area: main-content;
+            min-width: 0;
+        }
+
+        .sidebar-right {
+            grid-area: sidebar-right;
+            position: sticky;
+            top: 32px;
+            height: fit-content;
+        }
+
+        .section {
+            background: var(--panel);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 24px 48px rgba(0, 0, 0, 0.2);
+            border-radius: 16px;
+            padding: 24px;
+        }
+
+        .section-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .section-title::before {
+            content: "";
+            width: 4px;
+            height: 14px;
+            background: var(--gradient-blue);
+            border-radius: 2px;
+        }
+
+        .feature-section {
+            margin-bottom: 24px;
+        }
+
+        .feature-copy {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 14px;
+        }
+
+        .feature-list {
+            display: grid;
+            gap: 12px;
+        }
+
+        .feature-item {
+            padding: 14px 16px;
+            border-radius: 12px;
+            border: 1px solid rgba(120, 166, 255, 0.14);
+            background: var(--bg-card-soft);
+        }
+
+        .feature-item-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 6px;
+        }
+
+        .feature-item-desc {
+            font-size: 12px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .profile-header {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .profile-name {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        .profile-title {
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--accent-blue);
+            flex-shrink: 0;
+            margin-bottom: 10px;
+        }
+
+        .profile-summary {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 16px;
+        }
+
+        .summary-lead {
+            font-size: 16px;
+            line-height: 1.7;
+            color: var(--text-primary);
+            font-weight: 600;
+            margin-bottom: 14px;
+        }
+
+        .summary-highlight {
+            display: inline-block;
+            padding: 0 2px;
+            margin: 0 2px;
+            border-radius: 4px;
+            background: linear-gradient(180deg, rgba(120, 166, 255, 0), rgba(120, 166, 255, 0.18));
+            color: #e0f2fe;
+            font-weight: 600;
+        }
+
+        .summary-body {
+            color: var(--text-secondary);
+            line-height: 1.9;
+        }
+
+        .summary-body strong {
+            color: #f8fafc;
+            font-weight: 600;
+        }
+
+        .profile-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: flex-start;
+        }
+
+        .profile-tag {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        .profile-tag svg {
+            width: 14px;
+            height: 14px;
+            color: var(--accent-blue);
+        }
+
+        .core-skills-card {
+            grid-area: core-skills;
+            align-self: stretch;
+            background: var(--panel);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 24px 48px rgba(0, 0, 0, 0.24);
+            border-radius: 16px;
+            padding: 18px 22px 20px;
+        }
+
+        .core-skills-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .core-skill-tag {
+            padding: 11px 13px;
+            border-radius: 999px;
+            background: linear-gradient(135deg, rgba(120, 166, 255, 0.14), rgba(87, 215, 208, 0.1));
+            border: 1px solid rgba(120, 166, 255, 0.18);
+            color: #dbeafe;
+            font-size: 12px;
+            font-weight: 500;
+            line-height: 1.35;
+        }
+
+        .timeline-section {
+            background: var(--panel);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 24px 48px rgba(0, 0, 0, 0.24);
+            border-radius: 16px;
+            padding: 24px;
+        }
+
+        .timeline-list {
+            position: relative;
+            padding-left: 24px;
+        }
+
+        .timeline-list::before {
+            content: "";
+            position: absolute;
+            left: 4px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background-color: var(--border-color);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-bottom: 24px;
+        }
+
+        .timeline-item:last-child {
+            padding-bottom: 0;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: -22px;
+            top: 4px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: var(--accent-blue);
+            border: 3px solid var(--bg-card);
+        }
+
+        .timeline-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 6px;
+        }
+
+        .timeline-company {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .timeline-time {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .timeline-role {
+            font-size: 13px;
+            color: var(--accent-blue);
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .timeline-desc {
+            font-size: 12px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .project-card {
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 1px solid var(--border-color);
+            background:
+                radial-gradient(circle at 85% 18%, rgba(87, 215, 208, 0.1), transparent 20%),
+                radial-gradient(circle at 8% 100%, rgba(120, 166, 255, 0.1), transparent 24%),
+                var(--panel);
+            box-shadow: 0 24px 48px rgba(0, 0, 0, 0.2);
+        }
+
+        .project-card:hover {
+            border-color: rgba(120, 166, 255, 0.34);
+            box-shadow: 0 28px 54px rgba(0, 0, 0, 0.28);
+            transform: translateY(-2px);
+        }
+
+        .project-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 12px;
+        }
+
+        .project-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            background-color: #1f2937;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .project-icon svg {
+            width: 22px;
+            height: 22px;
+            color: var(--accent-green);
+        }
+
+        .project-icon img,
+        .project-service-icon img,
+        .service-target-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+            background: #ffffff;
+        }
+
+        .service-logo-wrap {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .service-logo-fallback {
+            display: none;
+            width: 100%;
+            height: 100%;
+            align-items: center;
+            justify-content: center;
+            color: #cbd5e1;
+        }
+
+        .service-logo-fallback svg {
+            width: 60%;
+            height: 60%;
+        }
+
+        .service-logo-wrap.is-fallback .service-logo-img {
+            display: none;
+        }
+
+        .service-logo-wrap.is-fallback .service-logo-fallback {
+            display: flex;
+        }
+
+        .project-icon.blue svg {
+            color: var(--accent-blue);
+        }
+
+        .project-icon.green svg {
+            color: var(--accent-green);
+        }
+
+        .project-icon.cyan svg {
+            color: var(--accent-cyan);
+        }
+
+        .project-icon-bg-blue {
+            background-color: rgba(120, 166, 255, 0.15);
+        }
+
+        .project-icon-bg-green {
+            background-color: rgba(16, 185, 129, 0.15);
+        }
+
+        .project-title-area {
+            flex: 1;
+        }
+
+        .project-subtitle {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-bottom: 2px;
+        }
+
+        .project-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .project-service {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 8px;
+            color: var(--text-muted);
+        }
+
+        .project-service-icon {
+            width: 22px;
+            height: 22px;
+            border-radius: 999px;
+            background-color: rgba(255, 255, 255, 0.06);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: #cbd5e1;
+            overflow: hidden;
+        }
+
+        .project-service-icon svg {
+            width: 12px;
+            height: 12px;
+        }
+
+        .project-service-name {
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: nowrap;
+            gap: 8px;
+            margin: 8px 0 14px;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+
+        .project-tags::-webkit-scrollbar {
+            display: none;
+        }
+
+        .project-tag {
+            font-size: 11px;
+            padding: 4px 10px;
+            background-color: rgba(120, 166, 255, 0.15);
+            color: var(--accent-blue);
+            border-radius: 12px;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        .project-tag.highlight {
+            background-color: rgba(16, 185, 129, 0.15);
+            color: var(--accent-green);
+        }
+
+        .project-detail-row {
+            margin-bottom: 12px;
+        }
+
+        .project-detail-label {
+            font-size: 11px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 6px;
+        }
+
+        .project-detail-text {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .project-summary-list {
+            margin: 14px 0 0;
+            padding-left: 18px;
+            display: grid;
+            gap: 10px;
+        }
+
+        .project-summary-list li {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .project-summary-list strong {
+            color: #f8fafc;
+            font-weight: 600;
+        }
+
+        .project-inline-highlight {
+            display: inline-block;
+            padding: 0 3px;
+            margin: 0 1px;
+            border-radius: 4px;
+            background: linear-gradient(180deg, rgba(16, 185, 129, 0), rgba(16, 185, 129, 0.18));
+            color: #ecfeff;
+            font-weight: 600;
+        }
+
+        .project-metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+            gap: 12px;
+            padding: 16px;
+            background-color: rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            margin-top: 16px;
+        }
+
+        .metric-item {
+            text-align: center;
+        }
+
+        .metric-value {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--accent-blue);
+            margin-bottom: 4px;
+        }
+
+        .metric-value.green {
+            color: var(--accent-green);
+        }
+
+        .metric-label {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        .education-card {
+            background: var(--panel);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 24px 48px rgba(0, 0, 0, 0.24);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 16px;
+        }
+
+        .education-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            padding-bottom: 16px;
+        }
+
+        .education-item:last-child {
+            padding-bottom: 0;
+            margin-bottom: 0;
+        }
+
+        .education-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background-color: rgba(59, 130, 246, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .education-icon svg {
+            width: 20px;
+            height: 20px;
+            color: var(--accent-blue);
+        }
+
+        .education-info {
+            flex: 1;
+        }
+
+        .education-school {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 2px;
+        }
+
+        .education-major {
+            font-size: 13px;
+            color: var(--accent-blue);
+            margin-bottom: 4px;
+        }
+
+        .education-time {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+
+
+        .interview-assistant-section {
+            padding: 24px 0 0;
+            overflow: hidden;
+            background:
+                radial-gradient(circle at top right, rgba(87, 215, 208, 0.1), transparent 34%),
+                linear-gradient(180deg, rgba(18, 25, 39, 0.98), rgba(10, 14, 22, 0.98));
+        }
+
+        .interview-assistant-section .section-title {
+            padding: 0 24px;
+            margin-bottom: 12px;
+        }
+
+        .chat-container {
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 620px;
+            height: min(72vh, 720px);
+            margin: 0 16px 16px;
+            border: 1px solid rgba(120, 166, 255, 0.14);
+            border-radius: 20px;
+            background:
+                linear-gradient(180deg, rgba(17, 24, 39, 0.98), rgba(10, 14, 22, 0.98));
+            box-shadow:
+                inset 0 1px 0 rgba(255, 255, 255, 0.04),
+                0 24px 48px rgba(0, 0, 0, 0.22);
+        }
+
+        .chat-container::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background:
+                radial-gradient(circle at top right, rgba(79, 140, 255, 0.2), transparent 30%),
+                radial-gradient(circle at 12% 24%, rgba(60, 200, 216, 0.08), transparent 24%);
+        }
+
+        .chat-header {
+            position: relative;
+            z-index: 1;
+            padding: 16px 18px 14px;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0));
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .chat-header-main {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .chat-header-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, rgba(79, 140, 255, 0.9), rgba(60, 200, 216, 0.86));
+            box-shadow: 0 10px 22px rgba(79, 140, 255, 0.24);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .chat-header-icon svg {
+            width: 18px;
+            height: 18px;
+            color: #ffffff;
+        }
+
+        .chat-header-copy {
+            min-width: 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .chat-header-subtitle {
+            font-size: 13px;
+            line-height: 1.65;
+            color: rgba(255, 255, 255, 0.72);
+            max-width: 320px;
+        }
+
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            position: relative;
+            z-index: 1;
+            padding: 22px 18px 18px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            background:
+                linear-gradient(180deg, rgba(255, 255, 255, 0.012), rgba(255, 255, 255, 0)),
+                rgba(9, 12, 19, 0.18);
+        }
+
+        .chat-welcome-panel {
+            border-radius: 18px;
+            padding: 18px;
+            background:
+                linear-gradient(135deg, rgba(120, 166, 255, 0.12), rgba(87, 215, 208, 0.06)),
+                rgba(17, 24, 39, 0.78);
+            border: 1px solid rgba(120, 166, 255, 0.2);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+        }
+
+        .chat-welcome-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #f5f7fb;
+            margin-bottom: 8px;
+            letter-spacing: 0.01em;
+        }
+
+        .chat-welcome-copy {
+            font-size: 13px;
+            line-height: 1.72;
+            color: rgba(255, 255, 255, 0.76);
+        }
+
+        .chat-message {
+            max-width: 96%;
+            padding: 14px 16px;
+            border-radius: 14px;
+            font-size: 13px;
+            line-height: 1.72;
+            animation: fadeInUp 0.22s ease;
+        }
+
+        .chat-message.user {
+            align-self: flex-end;
+            background: linear-gradient(135deg, #4f8cff, #3cc8d8);
+            color: #ffffff;
+            border-bottom-right-radius: 4px;
+            box-shadow: 0 12px 28px rgba(79, 140, 255, 0.2);
+        }
+
+        .chat-message.ai {
+            align-self: flex-start;
+            width: 100%;
+            max-width: 100%;
+            background: rgba(23, 31, 49, 0.88);
+            color: var(--text-primary);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-bottom-left-radius: 6px;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.02);
+        }
+
+        .chat-message.ai.chat-message-plain {
+            padding: 0;
+            background: transparent;
+            border: none;
+            box-shadow: none;
+        }
+
+        .chat-message.ai p,
+        .chat-message.ai ul,
+        .chat-message.ai ol,
+        .chat-message.ai .chat-heading {
+            margin: 0 0 10px;
+        }
+
+        .chat-message.ai p:last-child,
+        .chat-message.ai ul:last-child,
+        .chat-message.ai ol:last-child,
+        .chat-message.ai .chat-heading:last-child {
+            margin-bottom: 0;
+        }
+
+        .chat-message.ai ul,
+        .chat-message.ai ol {
+            padding-left: 18px;
+        }
+
+        .chat-message.ai code {
+            font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+            font-size: 12px;
+            padding: 2px 6px;
+            border-radius: 6px;
+            background-color: rgba(59, 130, 246, 0.14);
+            color: #bfdbfe;
+        }
+
+        .chat-message.ai pre {
+            margin: 0 0 10px;
+            padding: 12px 14px;
+            border-radius: 10px;
+            overflow-x: auto;
+            background-color: rgba(2, 6, 23, 0.9);
+            border: 1px solid rgba(59, 130, 246, 0.14);
+        }
+
+        .chat-message.ai pre code {
+            display: block;
+            padding: 0;
+            background: transparent;
+            color: #dbeafe;
+            line-height: 1.7;
+        }
+
+        .chat-message.ai li + li {
+            margin-top: 6px;
+        }
+
+        .chat-message.ai strong {
+            color: #dbeafe;
+            font-weight: 700;
+        }
+
+        .chat-heading {
+            font-size: 13px;
+            font-weight: 700;
+            color: #f3f8ff;
+            letter-spacing: 0.01em;
+            padding-left: 10px;
+            border-left: 3px solid rgba(79, 140, 255, 0.92);
+        }
+
+        .chat-message.ai .chat-section {
+            margin-bottom: 12px;
+        }
+
+        .chat-message.ai .chat-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .chat-input-area {
+            position: relative;
+            z-index: 1;
+            padding: 16px 18px 18px;
+            background:
+                linear-gradient(180deg, rgba(10, 12, 18, 0), rgba(10, 12, 18, 0.78) 16%, rgba(10, 12, 18, 0.96));
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .chat-input {
+            flex: 1;
+            min-height: 50px;
+            padding: 12px 16px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 14px;
+            font-size: 13px;
+            font-family: inherit;
+            background-color: rgba(255, 255, 255, 0.04);
+            color: var(--text-primary);
+            outline: none;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+        }
+
+        .chat-input:focus {
+            border-color: rgba(79, 140, 255, 0.72);
+            box-shadow: 0 0 0 3px rgba(79, 140, 255, 0.12);
+            background-color: rgba(255, 255, 255, 0.04);
+        }
+
+        .chat-input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .chat-send {
+            min-width: 84px;
+            padding: 12px 18px;
+            background: linear-gradient(135deg, #4f8cff, #3cc8d8);
+            color: #ffffff;
+            border: none;
+            border-radius: 14px;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.01em;
+            cursor: pointer;
+            transition: transform 0.2s ease, opacity 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 12px 26px rgba(79, 140, 255, 0.2);
+        }
+
+        .chat-clear {
+            min-width: 72px;
+            padding: 12px 14px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.03);
+            color: var(--text-secondary);
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+        }
+
+        .chat-clear:hover {
+            border-color: rgba(255, 255, 255, 0.14);
+            background: rgba(255, 255, 255, 0.06);
+            color: #ffffff;
+        }
+
+        .chat-send:hover {
+            opacity: 0.96;
+            transform: translateY(-1px);
+        }
+
+        .chat-send:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .quick-questions {
+            margin-top: 4px;
+        }
+
+        .quick-questions-title {
+            display: none;
+        }
+
+        .quick-question-tags {
+            display: grid;
+            gap: 12px;
+        }
+
+        .quick-tag {
+            min-height: 54px;
+            padding: 14px 16px;
+            background:
+                linear-gradient(135deg, rgba(255, 255, 255, 0.06), rgba(120, 166, 255, 0.03));
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            font-size: 13px;
+            line-height: 1.55;
+            text-align: left;
+            color: rgba(255, 255, 255, 0.84);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .quick-tag:hover {
+            background: linear-gradient(135deg, rgba(79, 140, 255, 0.14), rgba(60, 200, 216, 0.08));
+            color: #f5f7fb;
+            border-color: rgba(79, 140, 255, 0.28);
+            transform: translateY(-1px);
+            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+        }
+
+        .chat-followup-panel {
+            width: 100%;
+            padding: 16px;
+            border-radius: 18px;
+            background:
+                linear-gradient(135deg, rgba(120, 166, 255, 0.1), rgba(87, 215, 208, 0.04)),
+                rgba(14, 19, 30, 0.88);
+            border: 1px solid rgba(120, 166, 255, 0.14);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+        }
+
+        .chat-followup-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.58);
+            margin-bottom: 12px;
+            letter-spacing: 0.02em;
+        }
+
+        .chat-followup-tags {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px;
+        }
+
+        .followup-tag {
+            min-height: 48px;
+            padding: 12px 14px;
+            border-radius: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.04);
+            color: rgba(255, 255, 255, 0.84);
+            font-size: 12px;
+            line-height: 1.55;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .followup-tag:hover {
+            background: linear-gradient(135deg, rgba(79, 140, 255, 0.14), rgba(60, 200, 216, 0.08));
+            color: #f5f7fb;
+            border-color: rgba(79, 140, 255, 0.28);
+            transform: translateY(-1px);
+        }
+
+        .project-detail-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            padding: 20px;
+        }
+
+        .project-detail-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .project-detail-modal {
+            background: var(--panel);
+            border-radius: 16px;
+            max-width: 700px;
+            width: 100%;
+            max-height: 85vh;
+            overflow-y: auto;
+            transform: translateY(-20px);
+            transition: transform 0.3s ease;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.32);
+        }
+
+        .project-detail-overlay.active .project-detail-modal {
+            transform: translateY(0);
+        }
+
+        .modal-header {
+            padding: 20px 24px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            background: rgba(16, 22, 34, 0.96);
+            z-index: 10;
+        }
+
+        .modal-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .modal-close {
+            width: 36px;
+            height: 36px;
+            border: none;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: var(--text-secondary);
+            transition: all 0.2s ease;
+        }
+
+        .modal-close:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--text-primary);
+        }
+
+        .modal-body {
+            padding: 24px;
+        }
+
+        .detail-section {
+            margin-bottom: 24px;
+        }
+
+        .detail-section h3 {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .detail-section h3::before {
+            content: "";
+            width: 4px;
+            height: 14px;
+            background: var(--gradient-blue);
+            border-radius: 2px;
+        }
+
+        .detail-section p {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .detail-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .detail-list li {
+            font-size: 13px;
+            color: var(--text-secondary);
+            padding-left: 20px;
+            position: relative;
+            line-height: 1.6;
+        }
+
+        .detail-list li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--accent-blue);
+        }
+
+        .service-target-card {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 16px 18px;
+            background: linear-gradient(135deg, rgba(120, 166, 255, 0.16), rgba(87, 215, 208, 0.08));
+            border: 1px solid rgba(120, 166, 255, 0.2);
+            border-radius: 14px;
+        }
+
+        .service-target-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            background-color: rgba(255, 255, 255, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #dbeafe;
+            flex-shrink: 0;
+            overflow: hidden;
+        }
+
+        .service-target-icon svg {
+            width: 22px;
+            height: 22px;
+        }
+
+        .service-target-meta {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .service-target-label {
+            font-size: 12px;
+            color: var(--text-muted);
+            letter-spacing: 0.04em;
+        }
+
+        .service-target-name {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .modal-copy {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .data-results-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 14px;
+        }
+
+        .data-result-card {
+            padding: 16px;
+            border-radius: 14px;
+            border: 1px solid var(--border-color);
+            background-color: rgba(255, 255, 255, 0.03);
+        }
+
+        .data-result-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .data-result-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-primary);
+            line-height: 1.5;
+        }
+
+        .data-result-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--accent-blue);
+            margin-bottom: 8px;
+        }
+
+        .data-info-btn {
+            width: 22px;
+            height: 22px;
+            border: 1px solid rgba(120, 166, 255, 0.25);
+            border-radius: 50%;
+            background-color: rgba(120, 166, 255, 0.08);
+            color: #93c5fd;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: all 0.2s ease;
+        }
+
+        .data-info-btn:hover {
+            background-color: rgba(120, 166, 255, 0.16);
+            border-color: rgba(120, 166, 255, 0.4);
+            color: #dbeafe;
+        }
+
+        .data-definition {
+            display: none;
+            margin-top: 8px;
+            padding-top: 10px;
+            border-top: 1px dashed rgba(255, 255, 255, 0.1);
+            font-size: 12px;
+            line-height: 1.7;
+            color: var(--text-secondary);
+        }
+
+        .data-definition.active {
+            display: block;
+        }
+
+        .ability-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .ability-tag {
+            padding: 8px 12px;
+            border-radius: 999px;
+            background-color: rgba(16, 185, 129, 0.12);
+            border: 1px solid rgba(16, 185, 129, 0.22);
+            color: #d1fae5;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+
+
+        .typing-indicator {
+            display: flex;
+            gap: 4px;
+            width: fit-content;
+            padding: 12px 16px;
+            background-color: rgba(31, 31, 31, 0.95);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 14px;
+            border-bottom-left-radius: 6px;
+        }
+
+        .typing-dot {
+            width: 6px;
+            height: 6px;
+            background-color: #8fb9ff;
+            border-radius: 50%;
+            animation: typing 1.4s infinite ease-in-out both;
+        }
+
+        .typing-dot:nth-child(1) { animation-delay: -0.32s; }
+        .typing-dot:nth-child(2) { animation-delay: -0.16s; }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(8px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes typing {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1); }
+        }
+
+        .scroll-to-top {
+            position: fixed;
+            bottom: 80px;
+            right: 24px;
+            width: 44px;
+            height: 44px;
+            background: var(--gradient-blue);
+            color: #ffffff;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 99;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+
+        .scroll-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .page-bottom-fill {
+            width: 100%;
+            height: 92px;
+            background: #0c1018;
+        }
+
+        @media (max-width: 1024px) {
+            .app-container {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto;
+                grid-template-areas:
+                    "profile"
+                    "core-skills"
+                    "sidebar-left"
+                    "main-content"
+                    "sidebar-right";
+                padding: 20px 16px;
+                gap: 20px;
+            }
+
+            .sidebar-left,
+            .main-content,
+            .sidebar-right {
+                position: static;
+            }
+
+            .chat-container {
+                min-height: 540px;
+                height: 560px;
+                margin: 0 14px 14px;
+            }
+
+            .mobile-nav {
+                display: flex;
+            }
+
+            .skills-grid-2 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 640px) {
+            .top-tabs {
+                padding: 12px 16px;
+            }
+
+            .profile-header {
+                gap: 8px;
+            }
+
+            .profile-name {
+                font-size: 24px;
+            }
+
+            .project-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .chat-container {
+                min-height: 500px;
+                height: 520px;
+                margin: 0 12px 12px;
+            }
+
+            .chat-header-subtitle {
+                max-width: none;
+                font-size: 12px;
+            }
+
+            .chat-followup-tags {
+                grid-template-columns: 1fr;
+            }
+
+            .project-metrics {
+                grid-template-columns: 1fr;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .data-results-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="top-tabs-wrap">
+        <nav class="top-tabs" aria-label="页面导航">
+            <a class="top-tab active" href="#resume-home">简历主页</a>
+            <a class="top-tab" href="vibe_coding_apps.html">Vibe Coding的应用</a>
+            <a class="top-tab" href="skill_library.html">封装的Skill</a>
+        </nav>
+    </div>
+
+    <div class="app-container" id="resume-home">
+        <div class="profile-area">
+            <div class="profile-card">
+                <div class="profile-header">
+                    <div class="profile-name">管开祥</div>
+                    <div class="profile-title">AI产品经理 · 6年以上工作经验</div>
+                    <div class="profile-tags">
+                        <div class="profile-tag">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="8" r="4"/>
+                                <path d="M6 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/>
+                            </svg>
+                            <span>年龄：29岁</span>
+                        </div>
+                        <div class="profile-tag">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                                <circle cx="12" cy="10" r="3"/>
+                            </svg>
+                            <span>地址：上海市</span>
+                        </div>
+                        <div class="profile-tag">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                            </svg>
+                            <span>电话&微信：198 0212 5518</span>
+                        </div>
+                        <div class="profile-tag">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                                <polyline points="22,6 12,13 2,6"/>
+                            </svg>
+                            <span>邮箱：1219106121@qq.com</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="profile-summary">
+                    <div class="summary-lead">
+                        6年以上产品经验，近3年持续聚焦
+                        <span class="summary-highlight">企业级AI产品落地</span>
+                        ，具备
+                        <span class="summary-highlight">AI产品规划与0-1落地</span>
+                        经验，能够推动AI能力从方案设计走向真实业务上线。
+                    </div>
+                    <div class="summary-body">
+                        主导过<span class="summary-highlight">大模型应用规划、上线与持续迭代</span>，覆盖<span class="summary-highlight">客服、医疗、教育等高约束场景</span>，熟悉<span class="summary-highlight">模型选型、RAG、Prompt、工作流编排与评测闭环</span>。能够围绕业务目标拆解高价值场景，在<span class="summary-highlight">准确性、成本、时延、安全与合规</span>等约束下完成方案设计，并推动AI产品从需求分析、方案设计到上线优化形成闭环。
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="core-skills-card">
+            <div class="section-title">核心能力</div>
+            <div class="core-skills-tags">
+                <span class="core-skill-tag">AI产品规划与0-1落地</span>
+                <span class="core-skill-tag">大模型应用设计与模型选型</span>
+                <span class="core-skill-tag">RAG方案设计与知识库建设</span>
+                <span class="core-skill-tag">Prompt设计与工作流编排</span>
+                <span class="core-skill-tag">效果评测方案设计与迭代闭环</span>
+                <span class="core-skill-tag">Vibe Coding</span>
+                <span class="core-skill-tag">驾驭工程实践</span>
+                <span class="core-skill-tag">企业服务场景产品设计</span>
+                <span class="core-skill-tag">跨团队协同与项目交付</span>
+                <span class="core-skill-tag">医疗、教育、客服行业业务理解</span>
+            </div>
+        </div>
+        <aside class="sidebar-left">
+                <div class="timeline-section">
+                <div class="section-title">工作经历</div>
+                <div class="timeline-list">
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-header">
+                            <div class="timeline-company">上海理想信息产业有限公司（中国电信子公司）</div>
+                            <div class="timeline-time">2024.09 - 至今</div>
+                        </div>
+                        <div class="timeline-role">AI产品经理</div>
+                        <div class="timeline-desc">
+                            • 负责面向大中型B端、G端客户的AI应用规划与落地，覆盖智能客服、医疗、教育等场景。<br>
+                            • 主导上海电信智能客服、中医大模型、智能教学平台等项目的需求拆解、方案设计、Prompt/知识库策略和评测闭环建设。<br>
+                            • 推动AI渠道独立承接近50%套餐咨询流量，套餐订购率达30.7%；医生病历修改时间降低约80%，诊疗效率提升30%以上；AI出题准确率达96.7%，教案和课件可直接使用率达80%以上。
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-header">
+                            <div class="timeline-company">上海脑医汇科技有限公司</div>
+                            <div class="timeline-time">2023.04 - 2024.07</div>
+                        </div>
+                        <div class="timeline-role">产品经理</div>
+                        <div class="timeline-desc">
+                            • 负责医疗业务相关产品规划，覆盖AIGC智能问答、临床招募平台、慢病管理平台与企业CRM系统。<br>
+                            • 作为智能问答系统产品负责人，完成模型对比、医学知识库、RAG与Prompt方案设计，兼顾医疗场景准确性、专业性、合规性和成本约束。<br>
+                            • 产品上线两周内使用人数约1.6万人，二次使用及以上用户占比60%以上，单用户单次平均对话4.3条；临床招募平台稳定后3个月内营收超过60万元，外部引流患者5千人以上，后期月营收约30万元。
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-header">
+                            <div class="timeline-company">上海佳一健康管理有限公司</div>
+                            <div class="timeline-time">2021.10 - 2023.02</div>
+                        </div>
+                        <div class="timeline-role">产品经理</div>
+                        <div class="timeline-desc">
+                            • 负责医疗服务相关产品规划，覆盖AI智能客服、院外康复管理平台等项目。<br>
+                            • 在AI智能客服项目中，基于治疗指南、患教资料等企业医疗资源建设知识库，结合数据特征提取和相似内容检索实现患者常见问题自动回复，降低运营与疗程管理人力成本并提升响应效率。<br>
+                            • 参与院外康复管理平台规划，覆盖在线诊疗、用药管理、康复训练、康复评估、挂号加号、病历数据管理等场景，累计服务患者10万以上，沉淀病历数据30万份以上。
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-header">
+                            <div class="timeline-company">上海世外智慧教育有限公司（均瑶集团）</div>
+                            <div class="timeline-time">2020.10 - 2021.09</div>
+                        </div>
+                        <div class="timeline-role">产品经理</div>
+                        <div class="timeline-desc">
+                            • 负责英语启蒙产品和口语学习产品的规划与设计，积累教育场景产品经验。
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-header">
+                            <div class="timeline-company">上海信书信息科技有限公司</div>
+                            <div class="timeline-time">2019.11 - 2020.07</div>
+                        </div>
+                        <div class="timeline-role">产品经理</div>
+                        <div class="timeline-desc">
+                            • 负责相册制作产品优化迭代、人脸识别应用及裂变分销系统相关工作。
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <div class="section">
+                <div class="section-title">项目经验</div>
+                <div class="project-card" data-project="telecom-cs">
+                    <div class="project-header">
+                        <div class="project-title-area">
+                            <div class="project-title">上海电信智能客服项目</div>
+                        </div>
+                    </div>
+                    <div class="project-tags">
+                        <span class="project-tag">Prompt策略</span>
+                        <span class="project-tag">知识库设计</span>
+                        <span class="project-tag highlight">Dify工作流</span>
+                        <span class="project-tag">多模态应用</span>
+                    </div>
+                    <ul class="project-summary-list">
+                        <li>围绕<span class="project-inline-highlight">套餐咨询、套餐推荐、办理进度查询、售后服务</span>等场景拆解需求，定义<strong>产品流程</strong>、<strong>Prompt策略</strong>和评测方案。</li>
+                        <li>构建<strong>套餐、权益、售后服务向量知识库</strong>，结合<span class="project-inline-highlight">多模态模型与Dify工作流</span>，设计问答、推荐排序、多轮总结、工单流转和人工兜底能力。</li>
+                        <li>以<span class="project-inline-highlight">业务转化和服务承接效率</span>为导向推动持续迭代，持续优化AI渠道的咨询承接与套餐转化表现。</li>
+                    </ul>
+                    <div class="project-metrics">
+                        <div class="metric-item">
+                            <div class="metric-value">98%+</div>
+                            <div class="metric-label">推荐准确率</div>
+                        </div>
+                        <div class="metric-item">
+                            <div class="metric-value">近50%</div>
+                            <div class="metric-label">套餐咨询承接流量</div>
+                        </div>
+                        <div class="metric-item">
+                            <div class="metric-value green">30.7%</div>
+                            <div class="metric-label">套餐订购率</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card" data-project="tcm-llm">
+                    <div class="project-header">
+                        <div class="project-title-area">
+                            <div class="project-title">中医大模型项目</div>
+                        </div>
+                    </div>
+                    <div class="project-tags">
+                        <span class="project-tag">专病知识库</span>
+                        <span class="project-tag">RAG优化</span>
+                        <span class="project-tag highlight">Prompt约束</span>
+                        <span class="project-tag">医疗合规</span>
+                    </div>
+                    <ul class="project-summary-list">
+                        <li>面向<span class="project-inline-highlight">病历质控与中医临床辅助决策</span>场景，基于<strong>诊疗指南、膏方等知识</strong>构建AI应用方案。</li>
+                        <li>通过<span class="project-inline-highlight">专病知识库、RAG优化和Prompt约束</span>，强化病例检索、问题识别、依据追溯及诊疗建议一致性控制。</li>
+                        <li>将AI定位为<strong>医生辅助工具</strong>，兼顾<span class="project-inline-highlight">合规、安全和可审查性</span>，持续提升辅助诊疗与病历质控体验。</li>
+                    </ul>
+                    <div class="project-metrics">
+                        <div class="metric-item">
+                            <div class="metric-value">92.4%</div>
+                            <div class="metric-label">质控准确率</div>
+                        </div>
+                        <div class="metric-item">
+                            <div class="metric-value">约80%</div>
+                            <div class="metric-label">病历修改时间下降</div>
+                        </div>
+                        <div class="metric-item">
+                            <div class="metric-value green">30%+</div>
+                            <div class="metric-label">诊疗效率提升</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card" data-project="smart-teaching">
+                    <div class="project-header">
+                        <div class="project-title-area">
+                            <div class="project-title">智能教学平台</div>
+                        </div>
+                    </div>
+                    <div class="project-tags">
+                        <span class="project-tag">AI出题</span>
+                        <span class="project-tag highlight">知识图谱</span>
+                        <span class="project-tag">自动批改</span>
+                    </div>
+                    <ul class="project-summary-list">
+                        <li>负责<strong>大学智能教学平台</strong>规划，覆盖<span class="project-inline-highlight">备课、授课、课后作业与反馈</span>等场景。</li>
+                        <li>基于<strong>Qwen-Math</strong>、题目与教材知识库、<span class="project-inline-highlight">知识图谱</span>等能力，设计AI出题、AI教案、AI课件、自动批改和个性化练习等功能。</li>
+                        <li>搭建<span class="project-inline-highlight">“生成-检查-修改-反馈迭代”闭环</span>，持续优化生成内容质量与教学场景可用性。</li>
+                    </ul>
+                    <div class="project-metrics">
+                        <div class="metric-item">
+                            <div class="metric-value">96.7%</div>
+                            <div class="metric-label">AI出题准确率</div>
+                        </div>
+                        <div class="metric-item">
+                            <div class="metric-value">&lt;20%</div>
+                            <div class="metric-label">教案修改比例</div>
+                        </div>
+                        <div class="metric-item">
+                            <div class="metric-value green">80%+</div>
+                            <div class="metric-label">教案课件可用率</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card" data-project="smart-court">
+                    <div class="project-header">
+                        <div class="project-title-area">
+                            <div class="project-title">无锡检察院智能办案平台</div>
+                        </div>
+                    </div>
+                    <div class="project-tags">
+                        <span class="project-tag">文件解析</span>
+                        <span class="project-tag">案件知识库</span>
+                        <span class="project-tag highlight">三书比对</span>
+                        <span class="project-tag">Qwen-32B</span>
+                    </div>
+                    <ul class="project-summary-list">
+                        <li>面向检察院各业务部门，覆盖<span class="project-inline-highlight">类案发现、案件审查报告生成、三书比对</span>、发言稿与文书撰写、日常工作总结等场景。</li>
+                        <li>结合<strong>文件解析、Prompt、案件知识库、案件检索</strong>与<span class="project-inline-highlight">Qwen-32B / Qwen-Coder</span>，分别设计类案发现、报告生成、三书比对与智能问数能力。</li>
+                        <li>通过<span class="project-inline-highlight">结构化信息抽取、案例关联检索与生成辅助</span>，提升案件处理效率与内容产出可用性。</li>
+                    </ul>
+                    <div class="project-metrics">
+                        <div class="metric-item">
+                            <div class="metric-value">98%+</div>
+                            <div class="metric-label">信息提取准确率</div>
+                        </div>
+                        <div class="metric-item">
+                            <div class="metric-value">89%</div>
+                            <div class="metric-label">法条引用准确率</div>
+                        </div>
+                        <div class="metric-item">
+                            <div class="metric-value green">95%+</div>
+                            <div class="metric-label">生成内容可用率</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card" data-project="hsbc-regulatory">
+                    <div class="project-header">
+                        <div class="project-title-area">
+                            <div class="project-title">汇丰银行智能监管平台</div>
+                        </div>
+                    </div>
+                    <div class="project-tags">
+                        <span class="project-tag">外规内化</span>
+                        <span class="project-tag">文件解析</span>
+                        <span class="project-tag highlight">企业知识库</span>
+                        <span class="project-tag">行内模型</span>
+                    </div>
+                    <ul class="project-summary-list">
+                        <li>面向汇丰银行监管部门，承接<span class="project-inline-highlight">外规内化、监管报告撰写、新闻稿撰写</span>等企业级合规场景需求。</li>
+                        <li>基于<strong>Prompt、企业知识库、文件解析与行内模型</strong>，设计外规义务点提取、内外规匹配、报告生成和新闻稿生成能力。</li>
+                        <li>结合<span class="project-inline-highlight">用户在线修改结果沉淀反馈数据</span>，持续优化模型在内容准确性、引用匹配与业务可用性上的表现。</li>
+                    </ul>
+                    <div class="project-metrics">
+                        <div class="metric-item">
+                            <div class="metric-value">87.1%</div>
+                            <div class="metric-label">知识回答准确率</div>
+                        </div>
+                        <div class="metric-item">
+                            <div class="metric-value">89.4%</div>
+                            <div class="metric-label">引用准确率</div>
+                        </div>
+                        <div class="metric-item">
+                            <div class="metric-value green">78.5%</div>
+                            <div class="metric-label">报告撰写可用率</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card" data-project="medical-aigc-qa">
+                    <div class="project-header">
+                        <div class="project-title-area">
+                            <div class="project-title">医疗AIGC智能问答系统</div>
+                        </div>
+                    </div>
+                    <div class="project-tags">
+                        <span class="project-tag">模型选型</span>
+                        <span class="project-tag">RAG设计</span>
+                        <span class="project-tag highlight">Prompt设计</span>
+                        <span class="project-tag">结果评估</span>
+                    </div>
+                    <ul class="project-summary-list">
+                        <li>基于公司数据资源与业务场景，统筹<strong>智能问答系统产品规划</strong>，综合模型效果、成本和合规要求完成模型方案选择。</li>
+                        <li>结合<strong>诊疗资料、医学文章等知识库</strong>，运用<span class="project-inline-highlight">RAG与Prompt设计</span>打造脑科学领域智能问答能力，满足病例和资料查询、文章初稿生成等需求。</li>
+                        <li>建立<span class="project-inline-highlight">结果评估和用户反馈闭环</span>，持续优化问答效果、专业性与用户留存表现。</li>
+                    </ul>
+                    <div class="project-metrics">
+                        <div class="metric-item">
+                            <div class="metric-value">约1.6万人</div>
+                            <div class="metric-label">两周内使用人数</div>
+                        </div>
+                        <div class="metric-item">
+                            <div class="metric-value">4.3条</div>
+                            <div class="metric-label">单次平均对话</div>
+                        </div>
+                        <div class="metric-item">
+                            <div class="metric-value green">60%+</div>
+                            <div class="metric-label">二次使用占比</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+
+        <aside class="sidebar-right">
+            <div class="section interview-assistant-section">
+                <div class="section-title">AI问答助手</div>
+                <div class="chat-container">
+                    <div class="chat-header">
+                        <div class="chat-header-main">
+                            <div class="chat-header-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                                </svg>
+                            </div>
+                            <div class="chat-header-copy">
+                                <div class="chat-header-subtitle">直接提问，快速了解项目经历、结果数据和岗位匹配度。</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chat-messages" id="chatMessages">
+                        <div class="chat-message ai chat-message-plain">
+                            <div class="chat-welcome-panel">
+                                <div class="chat-welcome-title">从这里开始问我</div>
+                                <div class="chat-welcome-copy">你可以直接提问项目背景、结果数据、AI能力，或我适合的岗位方向，我会基于简历内容快速回答。</div>
+                            </div>
+                        </div>
+                        <div class="quick-questions" id="quickQuestions">
+                            <div class="quick-questions-title">快捷提问</div>
+                            <div class="quick-question-tags">
+                                <button class="quick-tag" type="button" data-question="能介绍一下你做过的核心项目吗？">能介绍一下你做过的核心项目吗？</button>
+                                <button class="quick-tag" type="button" data-question="能具体讲讲上海电信智能客服项目吗？">能具体讲讲上海电信智能客服项目吗？</button>
+                                <button class="quick-tag" type="button" data-question="能简单介绍一下你自己吗？">能简单介绍一下你自己吗？</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chat-input-area">
+                        <input type="text" class="chat-input" id="chatInput" placeholder="输入问题，了解更多..." />
+                        <button class="chat-clear" id="chatClear" type="button">清空</button>
+                        <button class="chat-send" id="chatSend">发送</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="education-card" style="margin-top: 24px;">
+                <div class="section-title">教育背景</div>
+                <div class="education-item">
+                    <div class="education-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 10v6M18 21v-6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2z"/>
+                            <path d="M12 18V3"/>
+                        </svg>
+                    </div>
+                    <div class="education-info">
+                        <div class="education-school">安徽大学（211）</div>
+                        <div class="education-major">视觉传达设计 · 本科</div>
+                        <div class="education-time">2015.8 - 2019.6</div>
+                    </div>
+                </div>
+                <div class="education-item">
+                    <div class="education-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M2 12h20"/>
+                            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                        </svg>
+                    </div>
+                    <div class="education-info">
+                        <div class="education-school">美国加州州立大学圣马克斯分校</div>
+                        <div class="education-major">Visual & Performing Arts</div>
+                        <div class="education-time">双学位项目</div>
+                    </div>
+                </div>
+
+            </div>
+        </aside>
+    </div>
+
+    <div class="page-bottom-fill" aria-hidden="true"></div>
+
+    <div class="project-detail-overlay" id="projectOverlay">
+        <div class="project-detail-modal">
+            <div class="modal-header">
+                <div class="modal-title" id="modalTitle">项目详情</div>
+                <button class="modal-close" id="modalClose">×</button>
+            </div>
+            <div class="modal-body" id="modalBody"></div>
+        </div>
+    </div>
+
+    <button class="scroll-to-top" id="scrollToTop">↑</button>
+
+    <script>
+        const projectData = {
+            "telecom-cs": {
+                title: "上海电信智能客服项目",
+                serviceTarget: { name: "中国电信股份有限公司上海分公司", icon: "telecom", logoUrl: "./图片/上海电信.png" },
+                demandBackground: "基于上海电信客服提效与部分人工替代目标，希望在高频客服场景中提升服务效率，并在员工套餐推荐等场景验证AI替代部分人工服务的可行性。",
+                scenesAndPainPoints: [
+                    "覆盖场景：套餐咨询、套餐推荐、办理进度查询、售后服务等高频客服链路。",
+                    "客户痛点：客服人员流动性大、培训上岗周期长、招聘与管理需要投入大量人力。",
+                    "用户痛点：等待时间长、反馈速度慢，且难以快速找到符合心理价位和需求的套餐。"
+                ],
+                solution: "采用Qwen3-30B-A3B与Qwen3-8B-VL多模型方案，结合Prompt、套餐/权益/活动知识库、函数调用与Dify工作流，构建咨询问答、推荐排序、非标准化诉求处理、智能工单和人工兜底能力；同时用“结构化摘要 + 最近10轮对话”方案解决长对话上下文衰减问题。",
+                metrics: [
+                    {
+                        label: "推荐准确率",
+                        value: "98%+",
+                        definition: "指推荐结果既满足用户已明确表达的筛选条件，又能覆盖主推套餐策略要求的比例。"
+                    },
+                    {
+                        label: "意图识别准确率",
+                        value: "92%+",
+                        definition: "指用户问题被正确识别为套餐咨询、套餐推荐、进度查询、售后等目标意图的比例。"
+                    },
+                    {
+                        label: "套餐订购率",
+                        value: "30.7%",
+                        definition: "指用户在AI完成推荐与引导后，最终进入办理链路并完成套餐订购的比例。"
+                    },
+                    {
+                        label: "长对话意图漂移率",
+                        value: "<5%",
+                        definition: "指在50轮以上长对话中，模型偏离当前真实用户意图的比例；该指标优化前约为15%。"
+                    }
+                ],
+                abilityTags: ["AI产品规划", "模型选型", "RAG知识库设计", "Dify工作流编排", "Prompt设计", "模型评估"]
+            },
+            "tcm-llm": {
+                title: "中医大模型项目",
+                serviceTarget: { name: "上海中医药大学附属龙华医院", icon: "medical", logoUrl: "./图片/龙华医院icon.png" },
+                demandBackground: "客户希望同时解决病历质控与中医临床辅助决策问题，通过识别问题病历、提供修改建议以及建设临床指南Agent，降低医生重复性文书工作与诊疗决策负担。",
+                scenesAndPainPoints: [
+                    "覆盖场景：病历质控、中医临床辅助决策、方剂查询、中医临床知识查询。",
+                    "客户痛点：病历质控依赖人工抽检，覆盖面低、标准不一，往往在事后才发现问题。",
+                    "临床痛点：病种复杂、症状表达模糊，医生需要可靠的辨证依据、推荐方剂与安全提醒。"
+                ],
+                solution: "基于微调后的方证大模型（Qwen3-8B）与临床指南、方剂、中药、ICD10等知识库，分别搭建病历质控与临床辅助决策流程；通过结构化RAG、六步辨证Prompt、JSON输出约束与安全警示机制，提升输出的可追溯性、合规性与可审查性。",
+                metrics: [
+                    {
+                        label: "质控准确率",
+                        value: "92.4%",
+                        definition: "指系统能正确找出问题病历、给出合理依据，并提出正确修改建议的比例。"
+                    },
+                    {
+                        label: "临床问答准确率",
+                        value: "86%",
+                        definition: "指病名、证型、症状、治法、方剂用量、禁忌等关键信息输出准确的比例。"
+                    },
+                    {
+                        label: "病历修改时间下降",
+                        value: "~80%",
+                        definition: "指医生在病历质控与文书修改环节所需投入的人工时间相较原流程的下降幅度。"
+                    },
+                    {
+                        label: "诊疗效率提升",
+                        value: "30%+",
+                        definition: "指医生在获取辨证依据、查询知识和完成辅助决策时整体效率的提升幅度。"
+                    }
+                ],
+                abilityTags: ["AI产品规划", "知识库结构化设计", "模型微调策略", "Prompt工程", "医疗合规设计", "评测闭环"]
+            },
+            "smart-teaching": {
+                title: "智能教学平台",
+                serviceTarget: { name: "浙江财经大学", icon: "education", logoUrl: "./图片/浙江财经大学.png" },
+                demandBackground: "客户希望建设智能教学平台，提高教师教学效率和学生学习效果，在出题、教案、课件和个性化练习等环节以AI替代部分重复劳动。",
+                scenesAndPainPoints: [
+                    "覆盖场景：教师备课、AI出题、AI教案、AI课件、课后作业批改、学情分析与学生个性化习题。",
+                    "教师痛点：备课、答疑与批改作业耗时长，其中大量工作模式固定且重复，耗费时间。",
+                    "学生痛点：缺少按个人掌握情况生成的练习与资料支持，学习成本较高。"
+                ],
+                solution: "采用Qwen2.5 72B/32B与Qwen-Math，结合教材、题目、教案和课件模板知识库及PPT生成插件，分别设计AI出题、AI教案、AI课件工作流，并通过在线修改、重新生成与反馈回流形成持续迭代闭环。",
+                metrics: [
+                    {
+                        label: "AI出题准确率",
+                        value: "96.7%",
+                        definition: "综合知识点匹配、难度匹配以及答案和解析正确性后的题目整体通过率。"
+                    },
+                    {
+                        label: "教案修改比例",
+                        value: "<20%",
+                        definition: "指教师手动修改的字数占AI生成教案原始字数的比例。"
+                    },
+                    {
+                        label: "教案课件直接可用率",
+                        value: "80%+",
+                        definition: "指教师无需大幅调整，仅做简单修改即可直接使用的教案与课件内容占比。"
+                    }
+                ],
+                abilityTags: ["AI产品规划", "教学场景需求分析", "Prompt设计", "知识库切片设计", "模型协同设计", "反馈闭环"]
+            },
+            "medical-aigc-qa": {
+                title: "医疗AIGC智能问答系统",
+                serviceTarget: { name: "上海脑医汇科技有限公司", icon: "medical" },
+                demandBackground: "基于公司数据资源与业务场景，统筹智能问答系统产品规划，综合模型效果、成本和合规要求完成模型方案选择。",
+                scenesAndPainPoints: [
+                    "覆盖场景：病例查询、资料查询、医学文章初稿生成等脑科学领域智能问答需求。",
+                    "业务约束：需要同时平衡模型效果、成本投入与医疗场景下的合规要求。",
+                    "产品目标：建立可持续优化的结果评估与用户反馈闭环。"
+                ],
+                solution: "结合诊疗资料、医学文章等知识库，运用RAG与Prompt设计打造脑科学领域智能问答能力，并通过结果评估和用户反馈机制持续优化产品效果。",
+                metrics: [
+                    {
+                        label: "两周内使用人数",
+                        value: "约1.6万人",
+                        definition: "指产品上线后两周内累计使用该智能问答系统的用户规模。"
+                    },
+                    {
+                        label: "单次平均对话",
+                        value: "4.3条",
+                        definition: "指单个用户每次使用智能问答系统时，平均发起的对话轮次数。"
+                    },
+                    {
+                        label: "二次使用及以上占比",
+                        value: "60%+",
+                        definition: "指在首次使用后，再次使用该产品的用户占总使用用户的比例。"
+                    }
+                ],
+                abilityTags: ["产品规划", "模型方案选择", "RAG设计", "Prompt设计", "结果评估", "用户反馈闭环"]
+            },
+            "smart-court": {
+                title: "无锡检察院智能办案平台",
+                serviceTarget: { name: "无锡检察院", icon: "justice", logoUrl: "https://www.spp.gov.cn/favicon.ico" },
+                demandBackground: "基于检察院各业务部门的办案与办公需求，希望通过AI提升类案发现、案件审查报告生成、三书比对、日常总结和文书撰写效率，并提高内容准确性。",
+                scenesAndPainPoints: [
+                    "覆盖场景：类案发现、案件审查报告生成、三书比对、发言稿/文书撰写、日常工作总结。",
+                    "业务痛点：案件材料查阅量大，关键信息提取与比对依赖人工，审查和总结效率低。",
+                    "内容痛点：法律条文、案件事实与文书结构要求严格，需要控制信息遗漏与引用错误。"
+                ],
+                solution: "以文件解析、Prompt、案件知识库与案件检索为基础，基于Qwen-32B私有化部署构建类案发现、案件审查报告生成、三书比对与文书撰写能力；同时结合Qwen-Coder支持日常工作总结等智能问数场景，形成结构化提取与生成闭环。",
+                metrics: [
+                    {
+                        label: "信息提取准确率",
+                        value: "98%+",
+                        definition: "指对案件核心字段、涉案人员、法律条款和文书关键信息提取正确的比例。"
+                    },
+                    {
+                        label: "法条引用准确率",
+                        value: "89%",
+                        definition: "指法条编号正确且法条内容与案件推理逻辑匹配的比例，优化前约为71%。"
+                    },
+                    {
+                        label: "生成内容可用率",
+                        value: "95%+",
+                        definition: "指案件审查报告、文书撰写等生成内容经少量调整后即可直接使用的比例。"
+                    }
+                ],
+                abilityTags: ["文件解析", "案件知识库", "Qwen-32B", "三书比对", "智能问数"]
+            },
+            "hsbc-regulatory": {
+                title: "汇丰银行智能监管平台",
+                serviceTarget: { name: "汇丰银行", icon: "finance", logoUrl: "./图片/汇丰银行.svg" },
+                demandBackground: "基于汇丰银行监管部门的需求，建设外规内化、监管报告撰写与对外发文能力，支持合规管理和内部监管场景。",
+                scenesAndPainPoints: [
+                    "覆盖场景：外规内化、监管报告撰写、新闻稿撰写、企业级知识问答。",
+                    "业务痛点：外部政策、监管文件和内部制度分散，人工梳理匹配成本高。",
+                    "内容痛点：报告与稿件准确性要求高，需要控制幻觉并建立持续优化的反馈数据。"
+                ],
+                solution: "基于Prompt、企业知识库、文件解析与行内模型，构建外规义务点提取、内外规比对匹配、监管报告生成和新闻稿生成能力；同时沉淀用户在线修改内容作为反馈数据，用于持续优化行内模型效果。",
+                metrics: [
+                    {
+                        label: "知识回答准确率",
+                        value: "87.1%",
+                        definition: "指企业级知识问答在监管与政策类问题上给出正确答案的比例。"
+                    },
+                    {
+                        label: "引用准确率",
+                        value: "89.4%",
+                        definition: "指回答或生成内容中引用的政策、监管文件与实际语义匹配的比例。"
+                    },
+                    {
+                        label: "报告撰写可用率",
+                        value: "78.5%",
+                        definition: "指生成报告内容在经过少量人工修改后可直接进入业务使用的比例。"
+                    },
+                    {
+                        label: "稿件撰写可用率",
+                        value: "83.4%",
+                        definition: "指生成新闻稿或类似稿件内容在业务侧被认为可用的比例。"
+                    }
+                ],
+                abilityTags: ["外规内化", "文件解析", "企业知识库", "行内模型", "反馈闭环"]
+            }
+        };
+
+        const serviceIcons = {
+            telecom: `
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                </svg>
+            `,
+            medical: `
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 21s-6.5-4.35-9-8.28C.93 9.63 2.2 5.5 6.2 4.3c2.25-.67 4.34.09 5.8 1.76 1.46-1.67 3.55-2.43 5.8-1.76 4 1.2 5.27 5.33 3.2 8.42C18.5 16.65 12 21 12 21z"/>
+                    <path d="M12 8v8"/>
+                    <path d="M8 12h8"/>
+                </svg>
+            `,
+            education: `
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                    <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                </svg>
+            `,
+            justice: `
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 3v18"/>
+                    <path d="M6 7h12"/>
+                    <path d="M7 7 4 12h6L7 7z"/>
+                    <path d="M17 7l-3 5h6l-3-5z"/>
+                    <path d="M5 21h14"/>
+                </svg>
+            `,
+            finance: `
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 10.5 12 4l9 6.5"/>
+                    <path d="M5 10v9"/>
+                    <path d="M10 10v9"/>
+                    <path d="M14 10v9"/>
+                    <path d="M19 10v9"/>
+                    <path d="M3 19h18"/>
+                </svg>
+            `,
+            airline: `
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="m2 16 20-8-8 20-2-9-10-3z"/>
+                    <path d="m12 19 3-3"/>
+                </svg>
+            `,
+            logistics: `
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 7h11v8H3z"/>
+                    <path d="M14 10h4l3 3v2h-7z"/>
+                    <circle cx="7.5" cy="18" r="1.5"/>
+                    <circle cx="18.5" cy="18" r="1.5"/>
+                </svg>
+            `,
+            default: `
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="9"/>
+                    <path d="M12 8v4"/>
+                    <path d="M12 16h.01"/>
+                </svg>
+            `
+        };
+
+        function renderServiceIcon(serviceTarget) {
+            const fallbackIcon = serviceIcons[serviceTarget?.icon] || serviceIcons.default;
+            if (serviceTarget?.logoUrl) {
+                return `
+                    <span class="service-logo-wrap">
+                        <img class="service-logo-img" src="${serviceTarget.logoUrl}" alt="${serviceTarget.name || "服务对象"}图标" loading="lazy" referrerpolicy="no-referrer">
+                        <span class="service-logo-fallback">${fallbackIcon}</span>
+                    </span>
+                `;
+            }
+            return `
+                <span class="service-logo-wrap is-fallback">
+                    <span class="service-logo-fallback">${fallbackIcon}</span>
+                </span>
+            `;
+        }
+
+        function wireServiceIconFallbacks(root = document) {
+            root.querySelectorAll('.service-logo-wrap').forEach(wrapper => {
+                const img = wrapper.querySelector('.service-logo-img');
+                if (!img) {
+                    wrapper.classList.add('is-fallback');
+                    return;
+                }
+
+                if (img.dataset.bound === 'true') return;
+                img.dataset.bound = 'true';
+
+                const showFallback = () => {
+                    wrapper.classList.add('is-fallback');
+                };
+
+                img.addEventListener('error', showFallback);
+
+                if (img.complete && (!img.naturalWidth || !img.naturalHeight)) {
+                    showFallback();
+                }
+            });
+        }
+
+        function renderTextSection(title, content) {
+            if (!content) return "";
+            return `
+                <div class="detail-section">
+                    <h3>${title}</h3>
+                    <p class="modal-copy">${content}</p>
+                </div>
+            `;
+        }
+
+        function renderListSection(title, items) {
+            if (!items || !items.length) return "";
+            return `
+                <div class="detail-section">
+                    <h3>${title}</h3>
+                    <ul class="detail-list">
+                        ${items.map(item => `<li>${item}</li>`).join("")}
+                    </ul>
+                </div>
+            `;
+        }
+
+        function renderMetricsSection(projectId, metrics) {
+            if (!metrics || !metrics.length) return "";
+            return `
+                <div class="detail-section">
+                    <h3>数据结果</h3>
+                    <div class="data-results-grid">
+                        ${metrics.map((metric, index) => {
+                            const definitionId = `${projectId}-metric-${index}`;
+                            return `
+                                <div class="data-result-card">
+                                    <div class="data-result-top">
+                                        <div class="data-result-label">${metric.label}</div>
+                                        ${metric.definition ? `<button class="data-info-btn" type="button" data-definition-id="${definitionId}" aria-label="查看${metric.label}定义">i</button>` : ""}
+                                    </div>
+                                    <div class="data-result-value">${metric.value}</div>
+                                    <div class="data-definition" id="${definitionId}">${metric.definition || ""}</div>
+                                </div>
+                            `;
+                        }).join("")}
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderAbilitySection(tags) {
+            if (!tags || !tags.length) return "";
+            return `
+                <div class="detail-section">
+                    <h3>能力标签</h3>
+                    <div class="ability-tags">
+                        ${tags.map(tag => `<span class="ability-tag">${tag}</span>`).join("")}
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderProjectModal(projectId, project) {
+            return `
+                <div class="detail-section">
+                    <h3>服务对象</h3>
+                    <div class="service-target-card">
+                        <div class="service-target-icon">${renderServiceIcon(project.serviceTarget)}</div>
+                        <div class="service-target-meta">
+                            <div class="service-target-label">SERVICE TARGET</div>
+                            <div class="service-target-name">${project.serviceTarget?.name || ""}</div>
+                        </div>
+                    </div>
+                </div>
+                ${renderTextSection("需求背景", project.demandBackground)}
+                ${renderListSection("场景与痛点", project.scenesAndPainPoints)}
+                ${renderTextSection("解决方案", project.solution)}
+                ${renderMetricsSection(projectId, project.metrics)}
+                ${renderAbilitySection(project.abilityTags)}
+            `;
+        }
+
+        function renderProjectServiceTarget(project) {
+            if (!project?.serviceTarget?.name) return "";
+            return `
+                <div class="project-service">
+                    <span class="project-service-icon">${renderServiceIcon(project.serviceTarget)}</span>
+                    <span class="project-service-name">${project.serviceTarget.name}</span>
+                </div>
+            `;
+        }
+
+        const projectCards = document.querySelectorAll('.project-card');
+        const overlay = document.getElementById('projectOverlay');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalBody = document.getElementById('modalBody');
+        const modalClose = document.getElementById('modalClose');
+
+        projectCards.forEach(card => {
+            const projectId = card.dataset.project;
+            const project = projectData[projectId];
+            if (!project) return;
+
+            const legacyIcon = card.querySelector('.project-icon');
+            if (legacyIcon) {
+                legacyIcon.remove();
+            }
+
+            const title = card.querySelector('.project-title');
+            if (title) {
+                title.textContent = project.title;
+            }
+
+            const titleArea = card.querySelector('.project-title-area');
+            if (titleArea) {
+                const existingService = titleArea.querySelector('.project-service');
+                if (existingService) {
+                    existingService.remove();
+                }
+                titleArea.insertAdjacentHTML('beforeend', renderProjectServiceTarget(project));
+            }
+        });
+
+        projectCards.forEach(card => {
+            card.addEventListener('click', () => {
+                const projectId = card.dataset.project;
+                const project = projectData[projectId];
+                
+                if (project) {
+                    modalTitle.textContent = project.title;
+                    modalBody.innerHTML = renderProjectModal(projectId, project);
+                    wireServiceIconFallbacks(modalBody);
+                    overlay.classList.add('active');
+                }
+            });
+        });
+
+        wireServiceIconFallbacks(document);
+
+        modalBody.addEventListener('click', (event) => {
+            const infoButton = event.target.closest('.data-info-btn');
+            if (!infoButton) return;
+
+            const definitionId = infoButton.dataset.definitionId;
+            const definition = modalBody.querySelector(`#${definitionId}`);
+            if (!definition) return;
+
+            definition.classList.toggle('active');
+        });
+
+        modalClose.addEventListener('click', () => {
+            overlay.classList.remove('active');
+        });
+
+        overlay.addEventListener('click', (e) => {
+            if (e.target === overlay) {
+                overlay.classList.remove('active');
+            }
+        });
+
+        const topTabs = document.querySelectorAll('.top-tab');
+
+        function setActiveTopTab() {
+            const hash = window.location.hash || '#resume-home';
+            topTabs.forEach(tab => {
+                tab.classList.toggle('active', tab.getAttribute('href') === hash);
+            });
+        }
+
+        topTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                topTabs.forEach(item => item.classList.remove('active'));
+                tab.classList.add('active');
+            });
+        });
+
+        window.addEventListener('hashchange', setActiveTopTab);
+        setActiveTopTab();
+
+        const chatInput = document.getElementById('chatInput');
+        const chatClear = document.getElementById('chatClear');
+        const chatSend = document.getElementById('chatSend');
+        const chatMessages = document.getElementById('chatMessages');
+
+        const CHAT_PROXY_ENDPOINT = '/api/chat';
+        const INITIAL_CHAT_HTML = chatMessages.innerHTML;
+
+        let conversationHistory = [];
+
+        const PROJECT_FOLLOW_UP_QUESTION_BANK = [
+            '项目的背景、覆盖场景、客户痛点、目标分别是什么？',
+            '产品技术方案是什么？',
+            '业务流程是什么？',
+            '模型选型、RAG、Prompt、工具、Skill 分别怎么做？',
+            '项目数据结果怎么样？',
+            '数据指标是什么？为什么选这些指标？哪些因素驱动效果表现？',
+            '反馈闭环怎么做？如何收集数据、标注数据、构建评测集？',
+            '整个项目中数据集怎么来的？你参与了哪些事情？',
+            '数据处理是怎么做的？',
+            '错误案例归因、提示词迭代是怎么做的？',
+            '商业化路径是什么？',
+            '遇到的最大挑战是什么？你怎么解决的？',
+            '如何降低大模型幻觉？',
+            '举例说明通过数据发现问题，再反向优化模型的过程。'
+        ];
+
+        const NON_PROJECT_FOLLOW_UPS = {
+            methodology: [
+                '如果从 0 到 1 做一个 AI 产品，你通常怎么拆解方案？',
+                '你在模型能力、成本、准确率之间通常怎么做取舍？',
+                '你做 AI 产品时，最看重哪些评测和迭代方法？'
+            ],
+            career: [
+                '你为什么会选择转向 AI 产品方向？',
+                '你觉得自己最突出的核心优势是什么？',
+                '你下一阶段最想继续深耕哪些 AI 产品场景？'
+            ],
+            collaboration: [
+                '你通常怎么和研发、算法、业务团队协作推进项目？',
+                '遇到跨团队目标不一致时，你一般怎么对齐？',
+                '你在项目中通常承担哪些推动和协调工作？'
+            ],
+            general: [
+                '如果让你总结一段最有代表性的经历，你会怎么讲？',
+                '你认为自己最适合什么类型的 AI 产品岗位？',
+                '如果加入新团队，你会优先从哪些方面快速进入状态？'
+            ]
+        };
+
+        function normalizeQuestionText(text) {
+            return String(text || '').replace(/\s+/g, '').trim();
+        }
+
+        function includesAnyKeyword(text, keywords) {
+            return keywords.some(keyword => text.includes(keyword));
+        }
+
+        function detectFollowUpTopic(query, aiResponse) {
+            const querySource = String(query || '').toLowerCase();
+            const answerSource = String(aiResponse || '').toLowerCase();
+
+            if (includesAnyKeyword(querySource, [
+                '方法论', '产品方案', '技术方案', '模型', 'rag', 'prompt', '工作流',
+                '评测', '指标', '数据集', 'skill', 'tool', '幻觉', '准确率'
+            ])) {
+                return 'methodology';
+            }
+
+            if (includesAnyKeyword(querySource, [
+                '自我介绍', '介绍一下你自己', '介绍你自己', '职业规划', '核心优势',
+                '为什么', '适合', '岗位', '求职', '经历', '转向ai'
+            ])) {
+                return 'career';
+            }
+
+            if (includesAnyKeyword(querySource, [
+                '团队', '协作', '跨部门', '沟通', '对齐', '推动', '研发', '算法',
+                '产品团队', '业务团队', '合作'
+            ])) {
+                return 'collaboration';
+            }
+
+            if (includesAnyKeyword(querySource, [
+                '项目', '案例', '上海电信', '电信', '客服', '中医', '教学平台',
+                '检察院', '汇丰', '脑医汇', '病历', '临床', 'ai应用', '智能客服'
+            ])) {
+                return 'project';
+            }
+
+            if (includesAnyKeyword(answerSource, [
+                '项目', '案例', '场景', '上海电信', '电信', '客服', '中医', '教学平台',
+                '检察院', '汇丰', '脑医汇', '病历', '临床', 'ai应用', '智能客服'
+            ])) {
+                return 'project';
+            }
+
+            return 'general';
+        }
+
+        function dedupeQuestions(questions, currentQuery) {
+            const current = normalizeQuestionText(currentQuery);
+            const seen = new Set();
+
+            return questions.filter((question) => {
+                const normalized = normalizeQuestionText(question);
+                if (!normalized || normalized === current || seen.has(normalized)) return false;
+                seen.add(normalized);
+                return true;
+            });
+        }
+
+        function buildProjectFollowUps(query) {
+            const source = query.toLowerCase();
+            const prioritized = [];
+
+            if (includesAnyKeyword(source, ['介绍', '核心项目', '代表性', '电信', '项目'])) {
+                prioritized.push(
+                    '项目的背景、覆盖场景、客户痛点、目标分别是什么？',
+                    '项目数据结果怎么样？'
+                );
+            }
+
+            if (includesAnyKeyword(source, ['技术', '方案', '架构', '流程'])) {
+                prioritized.push(
+                    '产品技术方案是什么？',
+                    '业务流程是什么？'
+                );
+            }
+
+            if (includesAnyKeyword(source, ['模型', 'rag', 'prompt', '工具', 'skill'])) {
+                prioritized.push(
+                    '模型选型、RAG、Prompt、工具、Skill 分别怎么做？',
+                    '如何降低大模型幻觉？'
+                );
+            }
+
+            if (includesAnyKeyword(source, ['数据', '结果', '指标', '效果'])) {
+                prioritized.push(
+                    '数据指标是什么？为什么选这些指标？哪些因素驱动效果表现？',
+                    '举例说明通过数据发现问题，再反向优化模型的过程。'
+                );
+            }
+
+            if (includesAnyKeyword(source, ['评测', '反馈', '标注', '数据集'])) {
+                prioritized.push(
+                    '反馈闭环怎么做？如何收集数据、标注数据、构建评测集？',
+                    '整个项目中数据集怎么来的？你参与了哪些事情？'
+                );
+            }
+
+            if (includesAnyKeyword(source, ['挑战', '问题', '困难'])) {
+                prioritized.push(
+                    '遇到的最大挑战是什么？你怎么解决的？',
+                    '错误案例归因、提示词迭代是怎么做的？'
+                );
+            }
+
+            if (includesAnyKeyword(source, ['商业化', '客户价值', '变现'])) {
+                prioritized.push(
+                    '商业化路径是什么？',
+                    '数据指标是什么？为什么选这些指标？哪些因素驱动效果表现？'
+                );
+            }
+
+            return dedupeQuestions(
+                [...prioritized, ...PROJECT_FOLLOW_UP_QUESTION_BANK],
+                query
+            ).slice(0, 2);
+        }
+
+        function buildGeneralFollowUps(query, aiResponse) {
+            const topic = detectFollowUpTopic(query, aiResponse);
+            if (topic === 'project') {
+                return buildProjectFollowUps(query);
+            }
+
+            const pool = NON_PROJECT_FOLLOW_UPS[topic] || NON_PROJECT_FOLLOW_UPS.general;
+            return dedupeQuestions(pool, query).slice(0, 2);
+        }
+
+        function clearFollowUpPanels() {
+            chatMessages.querySelectorAll('.chat-followup-panel').forEach(panel => panel.remove());
+        }
+
+        function addFollowUpPanel(questions) {
+            if (!Array.isArray(questions) || !questions.length) return;
+
+            const panel = document.createElement('div');
+            panel.className = 'chat-followup-panel';
+
+            const title = document.createElement('div');
+            title.className = 'chat-followup-title';
+            title.textContent = '推荐追问';
+            panel.appendChild(title);
+
+            const tags = document.createElement('div');
+            tags.className = 'chat-followup-tags';
+
+            questions.forEach((question) => {
+                const button = document.createElement('button');
+                button.className = 'followup-tag';
+                button.type = 'button';
+                button.dataset.question = question;
+                button.textContent = question;
+                tags.appendChild(button);
+            });
+
+            panel.appendChild(tags);
+            chatMessages.appendChild(panel);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function resetConversation() {
+            conversationHistory = [];
+            chatMessages.innerHTML = INITIAL_CHAT_HTML;
+            chatInput.value = '';
+            chatInput.focus();
+        }
+
+        function escapeHtml(text) {
+            return text
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;');
+        }
+
+        function renderInlineFormatting(text) {
+            return escapeHtml(text)
+                .replace(/`([^`]+)`/g, '<code>$1</code>')
+                .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+        }
+
+        function isHeadingLine(line) {
+            if (/^\*\*.+\*\*$/.test(line)) return true;
+            if (/^[^\n]{1,22}[：:]$/.test(line)) return true;
+            return false;
+        }
+
+        function renderStructuredMessage(text) {
+            const normalized = text.replace(/\r\n/g, '\n').trim();
+            if (!normalized) return '';
+
+            const codeBlocks = [];
+            const codeNormalized = normalized.replace(/```([\s\S]*?)```/g, (_, code) => {
+                const token = `__CODE_BLOCK_${codeBlocks.length}__`;
+                codeBlocks.push(`<pre><code>${escapeHtml(code.trim())}</code></pre>`);
+                return token;
+            });
+
+            const blocks = codeNormalized.split(/\n{2,}/).map(block => block.trim()).filter(Boolean);
+
+            return blocks.map(block => {
+                const codeIndexMatch = block.match(/^__CODE_BLOCK_(\d+)__$/);
+                if (codeIndexMatch) {
+                    return codeBlocks[Number(codeIndexMatch[1])] || '';
+                }
+
+                const lines = block.split('\n').map(line => line.trim()).filter(Boolean);
+                if (!lines.length) return '';
+
+                const unordered = lines.every(line => /^[-*•]\s+/.test(line));
+                if (unordered) {
+                    return `<ul>${lines.map(line => `<li>${renderInlineFormatting(line.replace(/^[-*•]\s+/, ''))}</li>`).join('')}</ul>`;
+                }
+
+                const ordered = lines.every(line => /^\d+\.\s+/.test(line));
+                if (ordered) {
+                    return `<ol>${lines.map(line => `<li>${renderInlineFormatting(line.replace(/^\d+\.\s+/, ''))}</li>`).join('')}</ol>`;
+                }
+
+                if (lines.length === 1 && isHeadingLine(lines[0])) {
+                    return `<div class="chat-heading">${renderInlineFormatting(lines[0])}</div>`;
+                }
+
+                if (lines.length > 1 && isHeadingLine(lines[0])) {
+                    const heading = `<div class="chat-heading">${renderInlineFormatting(lines[0])}</div>`;
+                    const body = `<p>${lines.slice(1).map(renderInlineFormatting).join('<br>')}</p>`;
+                    return `<div class="chat-section">${heading}${body}</div>`;
+                }
+
+                return `<p>${lines.map(renderInlineFormatting).join('<br>')}</p>`;
+            }).join('');
+        }
+
+        function addMessage(text, isUser) {
+            const message = document.createElement('div');
+            message.className = `chat-message ${isUser ? 'user' : 'ai'}`;
+            if (isUser) {
+                message.textContent = text;
+            } else {
+                message.innerHTML = renderStructuredMessage(text);
+            }
+            chatMessages.appendChild(message);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function addTypingIndicator() {
+            const indicator = document.createElement('div');
+            indicator.className = 'typing-indicator';
+            indicator.innerHTML = '<span class="typing-dot"></span><span class="typing-dot"></span><span class="typing-dot"></span>';
+            chatMessages.appendChild(indicator);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+            return indicator;
+        }
+
+        async function callAI(messages) {
+            try {
+                const response = await fetch(CHAT_PROXY_ENDPOINT, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        messages: messages
+                    })
+                });
+
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    throw new Error(`API请求失败: ${response.status} - ${errorText}`);
+                }
+
+                const data = await response.json();
+                return data.reply;
+            } catch (error) {
+                console.error('AI调用错误:', error);
+                return '抱歉，暂时无法连接到AI服务，请检查本地代理和 Coze 配置。错误信息：' + error.message;
+            }
+        }
+
+        async function sendMessage() {
+            const query = chatInput.value.trim();
+            if (!query) return;
+
+            clearFollowUpPanels();
+            addMessage(query, true);
+            chatInput.value = '';
+            chatSend.disabled = true;
+            chatClear.disabled = true;
+
+            const typingIndicator = addTypingIndicator();
+
+            conversationHistory.push({ role: 'user', content: query });
+
+            const aiResponse = await callAI(conversationHistory);
+
+            typingIndicator.remove();
+            addMessage(aiResponse, false);
+            conversationHistory.push({ role: 'assistant', content: aiResponse });
+            addFollowUpPanel(buildGeneralFollowUps(query, aiResponse));
+
+            chatSend.disabled = false;
+            chatClear.disabled = false;
+            chatInput.focus();
+        }
+
+        chatSend.addEventListener('click', sendMessage);
+
+        chatClear.addEventListener('click', () => {
+            if (chatSend.disabled) return;
+            resetConversation();
+        });
+
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        chatMessages.addEventListener('click', (event) => {
+            const questionTag = event.target.closest('.quick-tag, .followup-tag');
+            if (!questionTag || chatSend.disabled) return;
+
+            const question = questionTag.dataset.question;
+            if (!question) return;
+
+            chatInput.value = question;
+            sendMessage();
+        });
+
+
+
+        const scrollToTop = document.getElementById('scrollToTop');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                scrollToTop.classList.add('active');
+            } else {
+                scrollToTop.classList.remove('active');
+            }
+        });
+
+        scrollToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+    </script>
+</body>
+</html>
