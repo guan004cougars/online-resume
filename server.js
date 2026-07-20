@@ -842,11 +842,7 @@ function extractOpenAiCompatibleText(data) {
 async function callAppLlmFromBody(body, options = {}) {
     const url = getAppLlmUrl();
     if (!url || !CONFIG.appLlmApiKey || !CONFIG.appLlmModel) {
-        // If the app-model channel is unavailable, reuse the Coze path so
-        // other demos still have a chance to answer instead of hard failing.
-        const system = [body.system, options.system].filter(Boolean).join('\n\n');
-        const messages = mergeSystemIntoMessages(system, body.messages);
-        return callCoze(messages);
+        throw new Error('应用模型配置不完整。请检查内置配置或环境变量 APP_LLM_BASE_URL、APP_LLM_API_KEY、APP_LLM_MODEL。');
     }
 
     return callOpenAiCompatibleLlm(body, options);
@@ -1226,40 +1222,22 @@ const server = http.createServer(async (req, res) => {
             }
 
             const systemPrompt = buildResumeChatSystemPrompt(messages);
-            const cozeMessages = buildResumeCozeMessages(messages);
-
-            try {
-                const reply = await callCoze(cozeMessages);
-                sendJson(res, 200, { reply, source: 'coze' });
-                return;
-            } catch (cozeError) {
-                console.warn('[resume coze fallback]', cozeError.message);
-
-                try {
-                    const reply = await callOpenAiCompatibleLlm(
-                        {
-                            messages: cozeMessages,
-                            temperature: Number.isFinite(Number(body.temperature)) ? Number(body.temperature) : 0.4,
-                            max_tokens: Number(body.max_tokens || body.maxTokens || 1800),
-                        },
-                        {
-                            system: systemPrompt,
-                        }
-                    );
-
-                    sendJson(res, 200, {
-                        reply,
-                        source: 'builtin-app-llm-fallback',
-                        primaryError: cozeError.message,
-                    });
-                    return;
-                } catch (fallbackError) {
-                    throw new Error(
-                        `简历问答失败：Coze 调用失败(${cozeError.message})，内置兜底也失败(${fallbackError.message})`
-                    );
+            const reply = await callOpenAiCompatibleLlm(
+                {
+                    messages,
+                    temperature: Number.isFinite(Number(body.temperature)) ? Number(body.temperature) : 0.4,
+                    max_tokens: Number(body.max_tokens || body.maxTokens || 1800),
+                },
+                {
+                    system: systemPrompt,
                 }
+            );
 
-            }
+            sendJson(res, 200, {
+                reply,
+                source: 'builtin-app-llm',
+            });
+            return;
         }
 
         if (req.method !== 'GET') {

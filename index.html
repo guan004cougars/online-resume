@@ -2538,7 +2538,48 @@
             });
         }
 
-        function buildProjectFollowUps(query) {
+        function collectSeenUserQuestions(history) {
+            const seen = new Set();
+            (Array.isArray(history) ? history : []).forEach((message) => {
+                if (message?.role !== 'user') return;
+                const normalized = normalizeQuestionText(message.content);
+                if (normalized) {
+                    seen.add(normalized);
+                }
+            });
+            return seen;
+        }
+
+        function getConversationTopicStats(history) {
+            const stats = {
+                project: 0,
+                methodology: 0,
+                career: 0,
+                collaboration: 0,
+                general: 0
+            };
+
+            let lastAssistant = '';
+            (Array.isArray(history) ? history : []).forEach((message) => {
+                if (message?.role === 'assistant') {
+                    lastAssistant = message.content || '';
+                    return;
+                }
+
+                if (message?.role !== 'user') return;
+
+                const topic = detectFollowUpTopic(message.content || '', lastAssistant);
+                if (stats[topic] !== undefined) {
+                    stats[topic] += 1;
+                } else {
+                    stats.general += 1;
+                }
+            });
+
+            return stats;
+        }
+
+        function buildProjectFollowUps(query, seenQuestions = new Set()) {
             const source = query.toLowerCase();
             const prioritized = [];
 
@@ -2591,20 +2632,39 @@
                 );
             }
 
+            const seen = seenQuestions instanceof Set ? seenQuestions : new Set();
             return dedupeQuestions(
-                [...prioritized, ...PROJECT_FOLLOW_UP_QUESTION_BANK],
+                [...prioritized, ...PROJECT_FOLLOW_UP_QUESTION_BANK].filter((question) => !seen.has(normalizeQuestionText(question))),
                 query
             ).slice(0, 2);
         }
 
-        function buildGeneralFollowUps(query, aiResponse) {
+        function buildNonProjectFollowUps(query, aiResponse, seenQuestions = new Set()) {
             const topic = detectFollowUpTopic(query, aiResponse);
-            if (topic === 'project') {
-                return buildProjectFollowUps(query);
+            const pool = NON_PROJECT_FOLLOW_UPS[topic] || NON_PROJECT_FOLLOW_UPS.general;
+            const seen = seenQuestions instanceof Set ? seenQuestions : new Set();
+            return dedupeQuestions(
+                pool.filter((question) => !seen.has(normalizeQuestionText(question))),
+                query
+            ).slice(0, 2);
+        }
+
+        function buildGeneralFollowUps(query, aiResponse, history = []) {
+            const topic = detectFollowUpTopic(query, aiResponse);
+            const seenQuestions = collectSeenUserQuestions(history);
+            const topicStats = getConversationTopicStats(history);
+            const projectFollowUps = buildProjectFollowUps(query, seenQuestions);
+            const projectAskedEnough = topicStats.project >= 3;
+
+            if ((topic === 'project' || topic === 'general' || topic === 'methodology') && projectFollowUps.length) {
+                return projectFollowUps;
             }
 
-            const pool = NON_PROJECT_FOLLOW_UPS[topic] || NON_PROJECT_FOLLOW_UPS.general;
-            return dedupeQuestions(pool, query).slice(0, 2);
+            if (projectFollowUps.length >= 2 && !projectAskedEnough && topic !== 'career' && topic !== 'collaboration') {
+                return projectFollowUps;
+            }
+
+            return buildNonProjectFollowUps(query, aiResponse, seenQuestions);
         }
 
         function clearFollowUpPanels() {
@@ -2776,7 +2836,7 @@
             typingIndicator.remove();
             addMessage(aiResponse, false);
             conversationHistory.push({ role: 'assistant', content: aiResponse });
-            addFollowUpPanel(buildGeneralFollowUps(query, aiResponse));
+            addFollowUpPanel(buildGeneralFollowUps(query, aiResponse, conversationHistory));
 
             chatSend.disabled = false;
             chatClear.disabled = false;
