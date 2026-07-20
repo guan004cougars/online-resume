@@ -48,7 +48,7 @@ const BUILTIN_APP_LLM = {
 
 const CONFIG = {
     port: Number(process.env.PORT || 8787),
-    host: process.env.HOST || '127.0.0.1',
+    host: process.env.HOST || '0.0.0.0',
     appLlmBaseUrl: process.env.APP_LLM_BASE_URL || process.env.OPENAI_BASE_URL || BUILTIN_APP_LLM.baseUrl,
     appLlmApiKey: process.env.APP_LLM_API_KEY || process.env.OPENAI_API_KEY || BUILTIN_APP_LLM.apiKey,
     appLlmModel: process.env.APP_LLM_MODEL || process.env.OPENAI_MODEL || BUILTIN_APP_LLM.model,
