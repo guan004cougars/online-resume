@@ -451,6 +451,30 @@ const RESUME_PROFILE_BLOCK = `
 - 行业经验：电信客服、医疗、教育、金融合规、司法
 `.trim();
 
+const WORK_EXPERIENCE_BLOCK = `
+【工作经历】
+1. 上海理想信息产业有限公司（中国电信子公司），AI产品经理，2024.09 - 至今
+- 负责面向大中型B端、G端客户的AI应用规划与落地，覆盖智能客服、医疗、教育等场景。
+- 主导上海电信智能客服、中医大模型、智能教学平台等项目的需求拆解、方案设计、Prompt/知识库策略和评测闭环建设。
+- 推动AI渠道独立承接近50%套餐咨询流量，套餐订购率达30.7%；医生病历修改时间降低约80%，诊疗效率提升30%以上；AI出题准确率达96.7%，教案和课件可直接使用率达80%以上。
+
+2. 上海脑医汇科技有限公司，产品经理，2023.04 - 2024.07
+- 负责医疗业务相关产品规划，覆盖AIGC智能问答、临床招募平台、慢病管理平台与企业CRM系统。
+- 作为智能问答系统产品负责人，完成模型对比、医学知识库、RAG与Prompt方案设计，兼顾医疗场景准确性、专业性、合规性和成本约束。
+- 产品上线两周内使用人数约1.6万人，二次使用及以上用户占比60%以上，单用户单次平均对话4.3条；临床招募平台稳定后3个月内营收超过60万元，外部引流患者5千人以上，后期月营收约30万元。
+
+3. 上海佳一健康管理有限公司，产品经理，2021.10 - 2023.02
+- 负责医疗服务相关产品规划，覆盖AI智能客服、院外康复管理平台等项目。
+- 基于治疗指南、患教资料等企业医疗资源建设知识库，结合数据特征提取和相似内容检索实现患者常见问题自动回复。
+- 参与院外康复管理平台规划，覆盖在线诊疗、用药管理、康复训练、康复评估、挂号加号、病历数据管理等场景，累计服务患者10万以上，沉淀病历数据30万份以上。
+
+4. 上海世外智慧教育有限公司（均瑶集团），产品经理，2020.10 - 2021.09
+- 负责英语启蒙产品和口语学习产品规划与设计，积累教育场景产品经验。
+
+5. 上海信书信息科技有限公司，产品经理，2019.11 - 2020.07
+- 负责相册制作产品优化迭代、人脸识别应用及裂变分销系统相关工作。
+`.trim();
+
 const PROJECT_KNOWLEDGE_BLOCK = `
 【项目知识】
 1. 上海电信智能客服项目
@@ -494,8 +518,234 @@ const PROJECT_KNOWLEDGE_BLOCK = `
 - 结果：上线两周约1.6万人使用，二次使用及以上占比60%+，单用户单次平均对话4.3条。
 `.trim();
 
+const SELF_INTRO_SYSTEM_PROMPT = `
+当用户要求“自我介绍”或“介绍一下你自己/管开祥”时，请以管开祥本人的第一人称进行回答。
+只允许基于下面提供的个人背景、工作经历与6个项目知识组织内容，不要编造不存在的公司、项目、数据、技术栈或职责。
+回答建议控制在150-260字，突出AI产品经理定位、近年AI落地经验、代表项目、核心能力和适配岗位；不要机械罗列所有信息。
+如果用户明确要求更短或更正式，请按用户要求调整长度与语气。
+`.trim();
+
+const PROJECT_DETAIL_SYSTEM_PROMPT = `
+当用户明确追问某个具体项目时，请优先基于该项目的详细资料回答，而不是泛泛复述整份简历。
+回答要求：
+1. 严格基于提供资料，不编造未出现的项目细节、数据定义、技术选型或结果。
+2. 优先回答用户真正关心的点，如背景、痛点、方案、流程、模型选型、RAG、Prompt、评测、反馈闭环、指标定义、优化思路等。
+3. 如果用户问到的数据在资料中只有口径没有完整定义，要明确说明“当前资料里可确认的是……”，不要补造。
+4. 输出保持分段、清晰、有条理，必要时使用编号。
+`.trim();
+
+const PROJECT_DETAIL_KNOWLEDGE = {
+    telecom: `
+【项目深度资料：上海电信智能客服项目】
+- 服务对象：中国电信股份有限公司上海分公司。
+- 项目背景与目标：基于上海电信客服需求，提高服务效率，用 AI 替代部分人工服务；重点解决客服人员流动大、培训成本高、用户等待时间长、难以快速匹配合适套餐等问题。
+- 覆盖场景：套餐咨询、套餐推荐、办理进度查询、售后服务。
+- 技术方案：Prompt + 知识库（套餐信息、权益解释、活动信息、售后处理方案等）+ 函数调用 + ask human help + 多模态模型组合（Qwen3-30B-A3B / Qwen3-8B-VL）。
+- 多轮对话处理：保留最近10轮对话 + 关键轮次；关键轮包括新意图、关键信息提供、Agent关键操作。每10轮异步生成一次结构化摘要缓存，注入“对话摘要 + 最近10轮对话”，降低上下文膨胀。
+- 业务流程：登录校验 -> 意图识别 -> 消息澄清 -> 提取套餐需求 -> 查询套餐 -> 套餐排序（优先主推） -> 跳转办理链接 -> 用户可换一批或继续其他意图。
+- 模型与RAG：本地化部署在天翼云；场景以中短推理和工具调用为主。RAG 内容包括套餐、权益、活动、售后、标准回复话术；知识处理以问答对向量化为主，提高检索准确率。
+- 工具与能力：套餐查询接口；非标准化诉求处理能力，如价格敏感型补赠权益、流失用户追问原因与转人工等。
+- 核心指标：推荐准确率 98%+、意图识别准确率 92%+、套餐订购率 30.7%、AI 渠道承接近 50% 套餐咨询流量。
+- 指标口径补充：资料中明确区分“推荐准确率”和“首推命中率”。推荐准确率更偏条件命中，即推荐结果满足用户表达的筛选条件并覆盖主推套餐；首推命中率约 62%，是更接近业务转化的深层指标。
+- 反馈闭环：通过“换一批”、反馈按钮、转人工收集 bad case；将推荐不准、回答不准、非标准化诉求等问题分类，优化 Prompt、知识库和策略。
+- 典型优化点：围绕价格敏感、隐性需求、用户流失等问题做赠品策略、用户画像补全、追问节点设计，提升订购率。
+`.trim(),
+    teaching: `
+【项目深度资料：智能教学平台（浙江财经大学）】
+- 服务对象：浙江财经大学。
+- 项目背景与目标：构建智能教学平台，提高教师教学效率和学生学习效果；缓解教师备课、答疑、批改耗时高，以及学生个性化学习内容不足的问题。
+- 覆盖场景：教师端覆盖 AI 出题、AI 教案、AI 课件、批改、学情分析；学生端覆盖个性化习题与资料查询。
+- 技术方案：Prompt + 教学大模型（Qwen-2.5 72B / 32B）+ 题库/教材/教案/课件知识库 + PPT 生成插件 + 反馈闭环；出题环节结合 Qwen-Math 做检查。
+- 业务流程：
+  1. AI出题：选择知识点/难度/题量 -> 检索题库参考 -> 生成3道题 -> Math模型检查 -> 呈现 -> 用户加入/重生成/反馈错误。
+  2. AI教案：选择章节知识点 -> 生成大纲与内容 -> 在线调整与下载。
+  3. AI课件：选择章节知识点 -> 生成课件大纲与内容 -> 调整 -> 调用 PPT 工具生成课件。
+- 模型与RAG：内容生成主用 Qwen72B；校验主用 Qwen-Math。RAG 包含题目、教材、教案、课件等；题目做结构化字段处理，教案/教材/课件采用父子级切片。
+- 工具与Skill：PPT 生成工具；教案撰写、课件撰写等能力可模块化复用。
+- 核心结果：AI 出题准确率 95%+；AI 教案基本可直接使用，平均修改比例不超过 20%；AI 课件大纲和内容基本符合教师要求，PPT 需要少量人工调整。
+- 指标口径：出题准确率会细分为知识点匹配、难度匹配、内容结构正确率、题目与解析准确率；教案看内容准确率、结构完整率、内容评分；课件看结构准确率与内容准确率。
+- 反馈闭环：记录在线修改、重新生成、反馈、保存下载等行为；把 bad case 和高质量修改内容回流，用于 Prompt、案例库与知识库持续优化。
+- 典型挑战：不同教师风格差异大，一套提示词难覆盖所有人；通过可维护提示词与版本管理能力提高适配性。
+`.trim(),
+    tcm: `
+【项目深度资料：中医大模型项目（龙华医院）】
+- 服务对象：上海中医药大学附属龙华医院。
+- 项目背景与目标：围绕病历质控与中医临床辅助决策，提高医生效率与输出一致性；解决病历质控人工抽检覆盖低、标准不一，以及临床诊断依赖个人经验的问题。
+- 覆盖场景：病历质控、中医外科辅助决策、方剂/中药/指南知识查询。
+- 技术方案：本地化部署开源模型；核心使用微调后的方证大模型（基于 Qwen3-8B）+ 知识库 + Prompt。临床决策按“病-证-症-方-药”链路输出；病历质控按《病历规范》21条规则审查。
+- 业务流程：
+  1. 临床决策：输入解析 -> 检索指南/方剂知识 -> 辨证论治推理 -> 安全与合规约束 -> 结构化输出 -> 医生反馈。
+  2. 病历质控：上传病历 -> 模型按条例和 few-shot 找问题 -> 查询相似问题案例与修改建议 -> 给出修改内容 -> 在线反馈。
+- RAG 内容：方剂知识库、中药知识库、中医临床各科指南、古代膏方、海派膏方、ICD10 等。
+- 知识处理：方剂按作者、来源、朝代、方剂名、主治、组成、用法结构化；指南按病名、证型、主症、兼症与舌脉、治法、例方结构化；病历质控建议按“依据 + 问题病历 + 修改建议”构造成问答对，并按病种拆分。
+- Prompt 约束重点：知识边界受限、必须引用知识库依据、症状信息不足时要请求补充、输出结构化 JSON，并显式做禁忌与安全提醒。
+- 核心结果：病历质控准确率 92.4%；问答准确率约 86%；医生病历修改时间降低约 80%，诊疗效率提升 30%+。
+- 指标口径：质控准确率关注是否找出问题病历、给出合理依据和正确修改建议；问答准确率关注病名、证型、症状、治法、方剂用量、禁忌等输出准确率。
+- 反馈闭环：收集“准确/不准确”反馈，并细分为输出不足、内容错误、症状识别错误、方剂错误、病名不准、剂量超标等；结合 bad case、真实采样和对抗案例持续回归。
+- 典型挑战：患者口语化描述向中医症状标准化映射困难；方剂剂量个体差异大。优化方向包括症状标准化模型、口语-症状映射库、多轮澄清与知识库剂量反馈更新。
+`.trim(),
+    court: `
+【项目深度资料：无锡检察院智能办案平台】
+- 服务对象：无锡检察院相关业务部门。
+- 项目背景与目标：围绕办案与办公场景提升效率和准确率，减少人工查阅大量文件、提取关键信息、比对文书、撰写固定结构内容的时间成本。
+- 覆盖场景：类案发现、量刑建议、文书撰写、三书比对、审查报告生成。
+- 技术方案：文件解析 + Prompt + 案件/法律法规知识库 + 本地化 Qwen-32B；不同场景组合使用案件查询、结构化抽取与内容生成能力。
+- 业务流程：
+  1. 类案发现：输入罪名/案件过程/判罚或上传案件 -> 文件解析 -> 查询并推送相似案件。
+  2. 审查报告：上传案件文件 -> 文件解析 -> 基于 Prompt 和知识库生成报告。
+  3. 三书比对：上传起诉书/判决书/意见书 -> 提取关键字段 -> 结构化展示 -> 比对差异。
+  4. 量刑建议：解析关键情节 -> 检索同罪名/近似金额案例 -> 总结量刑区间与影响情节。
+- 模型与RAG：受限于 2 张 4090 的本地算力，选用 Qwen-32B。RAG 包括法律法规、判决书、案件数据；法律法规按法律名称/章/条切分，判决书与案件信息做结构化分段与父子级切片。
+- 关键知识处理：用规则解析器拆分“经审理查明”“本院认为”“判决结果”等字段；字段名归一化后再向量化，并按查询意图加字段过滤，提升法条与案件召回质量。
+- 核心结果：内容准确率约 95%；提取信息准确率 98%+；模型生成可用率 95%+；法条引用准确率从 71% 提升到约 89%。
+- 指标口径：关注内容结构正确、信息提取准确、法条引用准确、生成可用率；辅助指标包括提取准确率与法条引用准确率。
+- 反馈闭环：通过反馈按钮和在线修改收集 bad case，重点抓取修改幅度超过 20% 的内容；从切片问题、Prompt 约束不足、幻觉、知识缺失等角度归因。
+- 典型挑战：文书格式差异大、算力受限、相似案件检索不准。解决方法包括字段级结构化索引、规则解析 + LLM 兜底、父子级切片与字段过滤检索。
+`.trim(),
+    hsbc: `
+【项目深度资料：汇丰银行智能监管平台】
+- 服务对象：汇丰银行监管/合规部门。
+- 项目背景与目标：把外部监管规则更高效地转化为内部可执行的合规要求，并提升监管报告、新闻稿及相关内容产出的效率与可控性。
+- 覆盖场景：外规内化、监管报告撰写、新闻稿/对外稿件撰写、企业级知识问答。
+- 技术方案：Prompt + 企业知识库 + 文件解析 + 行内模型。外规内化场景中先解析外部监管文件，再抽取义务点，随后检索与匹配内部制度，最后输出缺失、冲突、部分匹配、完全匹配结果。
+- 业务流程：
+  1. 外规内化：上传监管文件 -> 文件解析 -> 条款/义务点抽取 -> 检索内规 -> 内外规匹配 -> 结构化展示结果。
+  2. 报告/新闻稿：上传政策文件、监管文件或相关新闻 -> 结合知识库生成初稿 -> 用户在线修改 -> 反馈沉淀为优化数据。
+- RAG 与数据处理：重点不是自然段切分，而是按章节、条款、义务点切分；内部制度同样做细粒度结构化，便于后续匹配和引用追溯。
+- Prompt 重点：先抽取再判断，避免一步到位自由生成；强约束结构化输出；无依据不输出；生成结果需带引用来源。
+- 可复用能力模块：义务点抽取、匹配关系判断、报告初稿生成。
+- 核心结果：企业级知识问答准确率 87.1%；引用准确率 89.4%；监管报告可用率 78.5%；新闻稿/类似稿件可用率 83.4%。
+- 指标口径：重点看问答准确率、引用准确率、报告可用率、稿件可用率；因为金融合规场景既要求答对，也要求引得准、最终能用。
+- 反馈闭环：以用户在线修改为核心反馈入口，围绕义务点抽取错误、匹配错误、引用错误、幻觉、可用性不足等维度标注；将修改量大、审核退回和 bad case 持续沉淀进回归集。
+- 典型挑战：准确性要求极高，且客户业务口径会变；解决方法是把任务拆成更稳定的节点，并把义务点识别等关键规则做成可维护、可配置的逻辑。
+`.trim(),
+    brain: `
+【项目深度资料：医疗AIGC智能问答系统（脑医汇）】
+- 服务对象：脑科学相关医疗业务场景。
+- 项目背景与目标：在兼顾专业性、准确性、合规性和成本约束的前提下，落地脑科学领域智能问答能力，满足病例和资料查询、文章初稿生成等需求。
+- 技术方案：基于医学知识库 + RAG + Prompt 设计完成智能问答方案，并结合多模型对比完成模型选型。
+- 工作重点：综合业务场景、模型效果、合规要求和成本做方案选择；建立结果评估与用户反馈闭环。
+- 核心结果：上线两周内使用人数约 1.6 万；二次使用及以上用户占比 60%+；单用户单次平均对话 4.3 条。
+- 说明：当前项目详细资料主要来自现有简历内容，若后续补充更完整项目文档，可继续增强这一块知识深度。
+`.trim(),
+};
+
+const PROJECT_DETAIL_MATCHERS = [
+    {
+        key: 'telecom',
+        pattern: /上海电信|中国电信|电信项目|电信客服|智能客服|套餐咨询|套餐推荐|办理进度|售后服务|晶晶/,
+    },
+    {
+        key: 'tcm',
+        pattern: /中医大模型|龙华医院|上海中医药大学附属龙华医院|病历质控|临床辅助决策|中医临床|辨证|方剂|膏方/,
+    },
+    {
+        key: 'teaching',
+        pattern: /浙江财经|浙江财经大学|智能教学平台|教学平台|AI出题|AI教案|AI课件|自动批改|个性化练习/,
+    },
+    {
+        key: 'court',
+        pattern: /无锡检察院|检察院|智能办案|类案发现|三书比对|审查报告|量刑建议|起诉书|判决书/,
+    },
+    {
+        key: 'hsbc',
+        pattern: /汇丰|汇丰银行|外规内化|监管报告|合规义务点|内外规|新闻稿|监管文件/,
+    },
+    {
+        key: 'brain',
+        pattern: /脑医汇|医疗AIGC智能问答|AIGC智能问答|脑科学|智能问答系统/,
+    },
+];
+
 function buildResumeFallbackSystemPrompt() {
-    return `${RESUME_FALLBACK_SYSTEM_PROMPT}\n\n${RESUME_PROFILE_BLOCK}\n\n${PROJECT_KNOWLEDGE_BLOCK}`;
+    return `${RESUME_FALLBACK_SYSTEM_PROMPT}\n\n${RESUME_PROFILE_BLOCK}\n\n${WORK_EXPERIENCE_BLOCK}\n\n${PROJECT_KNOWLEDGE_BLOCK}`;
+}
+
+function getLastUserMessage(messages) {
+    if (!Array.isArray(messages)) return null;
+
+    for (let index = messages.length - 1; index >= 0; index -= 1) {
+        const message = messages[index];
+        if (message?.role === 'user' && typeof message.content === 'string') {
+            return message;
+        }
+    }
+
+    return null;
+}
+
+function isSelfIntroRequest(messages) {
+    const lastUserMessage = getLastUserMessage(messages);
+    const content = lastUserMessage?.content?.trim() || '';
+    if (!content) return false;
+
+    return /自我介绍|介绍一下(?:你自己|自己|管开祥)|介绍下(?:你自己|自己|管开祥)|你是谁|个人介绍|做个介绍|简单介绍/.test(content);
+}
+
+function detectProjectIntentFromText(text) {
+    const value = String(text || '').trim();
+    if (!value) return [];
+
+    return PROJECT_DETAIL_MATCHERS
+        .filter((matcher) => matcher.pattern.test(value))
+        .map((matcher) => matcher.key);
+}
+
+function detectProjectIntent(messages) {
+    const lastUserMessage = getLastUserMessage(messages);
+    return detectProjectIntentFromText(lastUserMessage?.content || '');
+}
+
+function buildResumeSelfIntroSystemPrompt() {
+    return [
+        RESUME_FALLBACK_SYSTEM_PROMPT,
+        SELF_INTRO_SYSTEM_PROMPT,
+        RESUME_PROFILE_BLOCK,
+        WORK_EXPERIENCE_BLOCK,
+        PROJECT_KNOWLEDGE_BLOCK,
+    ].join('\n\n');
+}
+
+function buildResumeProjectDetailSystemPrompt(projectKeys) {
+    const detailBlocks = (Array.isArray(projectKeys) ? projectKeys : [])
+        .map((key) => PROJECT_DETAIL_KNOWLEDGE[key])
+        .filter(Boolean);
+
+    if (!detailBlocks.length) {
+        return buildResumeFallbackSystemPrompt();
+    }
+
+    return [
+        buildResumeFallbackSystemPrompt(),
+        PROJECT_DETAIL_SYSTEM_PROMPT,
+        ...detailBlocks,
+    ].join('\n\n');
+}
+
+function buildResumeChatSystemPrompt(messages) {
+    if (isSelfIntroRequest(messages)) {
+        return buildResumeSelfIntroSystemPrompt();
+    }
+
+    const matchedProjectKeys = detectProjectIntent(messages);
+    if (matchedProjectKeys.length) {
+        return buildResumeProjectDetailSystemPrompt(matchedProjectKeys);
+    }
+
+    return buildResumeFallbackSystemPrompt();
+}
+
+function buildResumeCozeMessages(messages) {
+    if (isSelfIntroRequest(messages)) {
+        return mergeSystemIntoMessages(buildResumeSelfIntroSystemPrompt(), messages);
+    }
+
+    const matchedProjectKeys = detectProjectIntent(messages);
+    if (matchedProjectKeys.length) {
+        return mergeSystemIntoMessages(buildResumeProjectDetailSystemPrompt(matchedProjectKeys), messages);
+    }
+
+    return messages;
 }
 
 function getAppLlmUrl() {
@@ -975,8 +1225,11 @@ const server = http.createServer(async (req, res) => {
                 return;
             }
 
+            const systemPrompt = buildResumeChatSystemPrompt(messages);
+            const cozeMessages = buildResumeCozeMessages(messages);
+
             try {
-                const reply = await callCoze(messages);
+                const reply = await callCoze(cozeMessages);
                 sendJson(res, 200, { reply, source: 'coze' });
                 return;
             } catch (cozeError) {
@@ -985,12 +1238,12 @@ const server = http.createServer(async (req, res) => {
                 try {
                     const reply = await callOpenAiCompatibleLlm(
                         {
-                            messages,
+                            messages: cozeMessages,
                             temperature: Number.isFinite(Number(body.temperature)) ? Number(body.temperature) : 0.4,
                             max_tokens: Number(body.max_tokens || body.maxTokens || 1800),
                         },
                         {
-                            system: buildResumeFallbackSystemPrompt(),
+                            system: systemPrompt,
                         }
                     );
 
