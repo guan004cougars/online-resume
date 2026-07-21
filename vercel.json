@@ -1,0 +1,16 @@
+{
+  "functions": {
+    "server.js": {
+      "includeFiles": [
+        "index.html",
+        "skill_library.html",
+        "vibe_coding_apps.html",
+        "vibe_llm_paradigms.html",
+        "图片/**",
+        "downloads/**",
+        "skill/**",
+        "llm-paradigms-app/**"
+      ]
+    }
+  }
+}
